@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://warefz.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://warefz.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://warefz.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//takesome.disqus.com">
+    <link rel="prefetch" href="//disqus.com">
+    <link rel="prefetch" href="//takesome.disqus.com">
+
+
+<link rel="prerender" href="https://warefz.github.io">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://warefz.github.io">
+<meta name="author" content="费智">
+<link rel="stylesheet" href="/css/JSimple.css">
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>position中的sticky - 记</title>
+
+<meta name="keywords" content>
+
+<meta name="description " content="sticky 盒位置根据正常流计算(这称为正常流动中的位置)，然后相对于该元素在流中的 flow root（BFC）和 containing block（最近的块级祖先元素）定位">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+</head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-telegram"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">费智</h1>
+        <h3 class="cover-siteTitle">用文字记录生活</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-telegram">
+        <a href target="_blank" title="telegram" ref="friend">
+            <i class="fa fa-telegram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-instagram">
+        <a href target="_blank" title="instagram" ref="friend">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/warefz" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">费智</a>
+                    <span title="最后编辑于&nbsp;2019-06-11">2019-06-11</span>
+                </p>
+                <p>ware_fz</p>
+            </div>
+            <h2 class="post-title">position中的sticky</h2>
+            <div class="post-meta">
+                本文共计1493个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>CSS的position有如下几种属性：</p>
+<h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>该关键字指定元素使用正常的布局行为，即元素在文档常规流中当前的布局位置。此时 top, right, bottom, left 和 z-index 属性无效。</p>
+<h4 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h4><p>该关键字下，元素先放置在未添加定位时的位置，再在不改变页面布局的前提下调整元素位置（因此会在此元素未添加定位时所在位置留下空白）。position:relative 对 table-*-group, table-row, table-column, table-cell, table-caption 元素无效。</p>
+<h4 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h4><p>不为元素预留空间，通过指定元素相对于最近的非 static 定位祖先元素的偏移，来确定元素位置。绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。</p>
+<h4 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h4><p>不为元素预留空间，而是通过指定元素相对于屏幕视口（viewport）的位置来指定元素位置。元素的位置在屏幕滚动时不会改变。打印时，元素会出现在的每页的固定位置。fixed 属性会创建新的层叠上下文。当元素祖先的 transform  属性非 none 时，容器由视口改为该祖先。</p>
+<h4 id="sticky"><a href="#sticky" class="headerlink" title="sticky"></a>sticky</h4><p>盒位置根据正常流计算(这称为正常流动中的位置)，然后相对于该元素在流中的 flow root（BFC）和 containing block（最近的块级祖先元素）定位。在所有情况下（即便被定位元素为 table 时），该元素定位均不对后续元素造成影响。当元素 B 被粘性定位时，后续元素的位置仍按照 B 未定位时的位置来确定。position: sticky 对 table 元素的效果与 position: relative 相同。</p>
+<h3 id="position-sticky"><a href="#position-sticky" class="headerlink" title="position:sticky"></a>position:sticky</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nav&#123;</span><br><span class="line">  position:sticky;</span><br><span class="line">  top:10px; /* 阈值 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>position属性中最有意思的就是sticky了，设置了sticky的元素，在屏幕范围（viewport）时该元素的位置并不受到定位影响（设置是top、left等属性无效），当该元素的位置将要移出偏移范围时，定位又会变成fixed，根据设置的left、top等属性成固定位置的效果。</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
+<li>该元素并不脱离文档流，任然保留元素原本在文档流的位置 </li>
+<li>当元素在容器中被滚动超过指定的偏移值的时候，元素在容器内固定在指定的位置上 </li>
+<li>元素固定的相对偏移是相对于离他最近的具有滚动框的祖先元素，如果祖先元素都不可以滚动，那么是相对于viewport来计算元素的偏移量<br>他是一个新的css3属性，他的表现类似于position:relative和position:fixed的合体，在目标区域在屏幕中是可见的时候，他的行为就像是position:relative,当目标滚动超出目标区域的时候，他的表现就像是fixed，他会固定在目标的位置。这个属性的兼容性还不是很好，目前仍是一个试验性的属性，并不是W3C推荐的标准。它之所以会出现，也是因为监听scroll事件来实现粘性布局使浏览器进入慢滚动的模式，这与浏览器想要通过硬件加速来提升滚动的体验是相悖的。</li>
+</ul>
+<h4 id="生效条件"><a href="#生效条件" class="headerlink" title="生效条件"></a>生效条件</h4><p>需要注意的是，使用该属性有几个必要条件，否则会失效：</p>
+<ul>
+<li>父元素不能overflow:hidden或者overflow:auto属性。</li>
+<li>必须指定top、bottom、left、right4个值之一，否则只会处于相对定位</li>
+<li>父元素的高度不能低于sticky元素的高度</li>
+<li>sticky元素仅在其父元素内生效</li>
+</ul>
+<h4 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h4><p>　　<img src="/img/sticky.png" alt="sticky兼容性"></p>
+
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/CSS/">CSS</a>
+            
+        </div>
+        
+    </article>
+    
+    
+
+    
+    
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+             *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+             *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+             */
+            var disqus_config = function () {
+                this.page.url = 'https://warefz.github.io/2019/06/11/position中的sticky/';
+                this.page.identifier = '2019/06/11/position中的sticky/';
+            };
+            (function () { // DON'T EDIT BELOW THIS LINE
+                var d = document, disqus_shortname = 'takesome', s = d.createElement('script');
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+
+
+</div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="帮助">帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://warefz.github.io" target="_blank" rel="friend">费智</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+<script src="/js/SimpleCore.js"></script>
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input" spellcheck="false" type="text" autocomplete="off" placeholder="请输入查询关键词">
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            buildingTime: '10/6/2019',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            donateImg: '/images/donate-qr.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        SimpleCore.init(jsi_config);
+        
+    });
+</script>
+</body>
+</html>

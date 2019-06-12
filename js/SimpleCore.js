@@ -580,6 +580,7 @@ var SimpleCore = {
         SimpleCore.buildingTime = params.buildingTime;
         SimpleCore.current = params.current;
         SimpleCore.donateImg = params.donateImg;
+        SimpleCore.snsQRCode = params.snsQRCode;
         SimpleCore.localSearch = params.localSearch;
         SimpleCore.readMode = params.readMode;
     },
@@ -612,8 +613,14 @@ var SimpleCore = {
             e.stopPropagation();
         });
         $(document).on('click', '.btn-sns-qr', function (e) {
-            e.preventDefault();
-            SimpleCore.alert('未开通自定义功能','<h4 style="text-align: center;margin: 0">联系博主试试看 ：）</h4>');
+            e.preventDefault();$(document).on('click', '.btn-sns-qr', function (e) {
+                e.preventDefault();
+                if (SimpleCore.snsQRCode != '') {
+                    SimpleCore.alert('联系博主请加微信','<img style="width:180px;background:#fff;" src="' + SimpleCore.snsQRCode + '">');
+                } else {
+                    SimpleCore.alert('未开通自定义功能','<h4 style="text-align: center;margin: 0">联系博主试试看 ：）</h4>');
+                }
+            });
         });
         $(document).on('click', '.btn-thumbs-up', function (e) {
             e.preventDefault();

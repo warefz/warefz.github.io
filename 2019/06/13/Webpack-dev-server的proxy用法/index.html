@@ -1,0 +1,292 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://warefz.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://warefz.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://warefz.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//warefz.disqus.com">
+    <link rel="prefetch" href="//disqus.com">
+    <link rel="prefetch" href="//warefz.disqus.com">
+
+
+<link rel="prerender" href="https://warefz.github.io">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://warefz.github.io">
+<meta name="author" content="ware_fz">
+<link rel="stylesheet" href="/css/JSimple.css">
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>webpack-dev-server的proxy用法 - 记</title>
+
+<meta name="keywords" content>
+
+<meta name="description " content>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+</head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-telegram"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">ware_fz</h1>
+        <h3 class="cover-siteTitle">用文字记录生活</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-telegram">
+        <a href target="_blank" title="telegram" ref="friend">
+            <i class="fa fa-telegram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-instagram">
+        <a href target="_blank" title="instagram" ref="friend">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/warefz" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-06-13">2019-06-13</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">Webpack-dev-server的proxy用法</h2>
+            <div class="post-meta">
+                本文共计4269个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><ol>
+<li>如果你有单独的后端开发服务器 API，并且希望在同域名下发送 API 请求 ，那么代理某些 URL 会很有用。</li>
+<li>解决开发环境的跨域问题(不用在去配置nginx和host)</li>
+</ol>
+<h3 id="在webpack-config-js中配置"><a href="#在webpack-config-js中配置" class="headerlink" title="在webpack.config.js中配置"></a>在webpack.config.js中配置</h3><p>下面简单介绍一下五个经常使用的场景</p>
+<h4 id="使用一"><a href="#使用一" class="headerlink" title="使用一"></a>使用一</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mmodule.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: <span class="string">'http://localhost:3000'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>请求到 /api/xxx 现在会被代理到请求 localhost:3000/api/xxx, 例如 /api/user现在会被代理到请求 localhost:3000/api/user</p>
+<h4 id="使用二"><a href="#使用二" class="headerlink" title="使用二"></a>使用二</h4><p>如果你想要代码多个路径代理到同一个target下, 你可以使用由一个或多个「具有 context 属性的对象」构成的数组：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: [&#123;</span><br><span class="line">            context: [<span class="string">'/auth'</span>, <span class="string">'/api'</span>],</span><br><span class="line">            target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用三"><a href="#使用三" class="headerlink" title="使用三"></a>使用三</h4><p>如果你不想始终传递 /api ，则需要重写路径：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                pathRewrite: &#123;<span class="string">'^/api'</span> : <span class="string">''</span>&#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>请求到 /api/xxx 现在会被代理到请求 localhost:3000/xxx, 例如 /api/user 现在会被代理到请求 localhost:3000/user</p>
+<h4 id="使用四"><a href="#使用四" class="headerlink" title="使用四"></a>使用四</h4><p>默认情况下，不接受运行在 HTTPS 上，且使用了无效证书的后端服务器。如果你想要接受，只要设置 secure: false 就行。修改配置如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'https://other-server.example.com'</span>,</span><br><span class="line">                secure: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="使用五"><a href="#使用五" class="headerlink" title="使用五"></a>使用五</h4><p>有时你不想代理所有的请求。可以基于一个函数的返回值绕过代理。<br>在函数中你可以访问请求体、响应体和代理选项。必须返回 false 或路径，来跳过代理请求。<br>例如：对于浏览器请求，你想要提供一个 HTML 页面，但是对于 API 请求则保持代理。你可以这样做：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                bypass: <span class="function"><span class="keyword">function</span>(<span class="params">req, res, proxyOptions</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (req.headers.accept.indexOf(<span class="string">'html'</span>) !== <span class="number">-1</span>) &#123;</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">'Skipping proxy for browser request.'</span>);</span><br><span class="line">                        <span class="keyword">return</span> <span class="string">'/index.html'</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决跨域原理"><a href="#解决跨域原理" class="headerlink" title="解决跨域原理"></a>解决跨域原理</h3><p>上面的参数列表中有一个changeOrigin参数, 是一个布尔值, 设置为true, 本地就会虚拟一个服务器接收你的请求并代你发送该请求<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    devServer: &#123;</span><br><span class="line">        proxy: &#123;</span><br><span class="line">            <span class="string">'/api'</span>: &#123;</span><br><span class="line">                target: <span class="string">'http://localhost:3000'</span>,</span><br><span class="line">                changeOrigin: <span class="literal">true</span>,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h3 id="vue-cli中proxyTable配置接口地址代理示例"><a href="#vue-cli中proxyTable配置接口地址代理示例" class="headerlink" title="vue-cli中proxyTable配置接口地址代理示例"></a>vue-cli中proxyTable配置接口地址代理示例</h3><p>修改 config/index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    dev: &#123;</span><br><span class="line">    <span class="comment">// 静态资源文件夹</span></span><br><span class="line">    assetsSubDirectory: <span class="string">'static'</span>,</span><br><span class="line">    <span class="comment">// 发布路径</span></span><br><span class="line">    assetsPublicPath: <span class="string">'/'</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 代理配置表，在这里可以配置特定的请求代理到对应的API接口</span></span><br><span class="line">    <span class="comment">// 使用方法：https://vuejs-templates.github.io/webpack/proxy.html</span></span><br><span class="line">    proxyTable: &#123;</span><br><span class="line">        <span class="comment">// 例如将'localhost:8080/api/xxx'代理到'https://wangyaxing.cn/api/xxx'</span></span><br><span class="line">        <span class="string">'/api'</span>: &#123;</span><br><span class="line">            target: <span class="string">'https://wangyaxing.cn'</span>, <span class="comment">// 接口的域名</span></span><br><span class="line">            secure: <span class="literal">false</span>,  <span class="comment">// 如果是https接口，需要配置这个参数</span></span><br><span class="line">            changeOrigin: <span class="literal">true</span>, <span class="comment">// 如果接口跨域，需要进行这个参数配置</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// 例如将'localhost:8080/img/xxx'代理到'https://cdn.wangyaxing.cn/xxx'</span></span><br><span class="line">        <span class="string">'/img'</span>: &#123;</span><br><span class="line">            target: <span class="string">'https://cdn.wangyaxing.cn'</span>, <span class="comment">// 接口的域名</span></span><br><span class="line">            secure: <span class="literal">false</span>,  <span class="comment">// 如果是https接口，需要配置这个参数</span></span><br><span class="line">            changeOrigin: <span class="literal">true</span>, <span class="comment">// 如果接口跨域，需要进行这个参数配置</span></span><br><span class="line">            pathRewrite: &#123;<span class="string">'^/img'</span>: <span class="string">''</span>&#125;  <span class="comment">// pathRewrite 来重写地址，将前缀 '/api' 转为 '/'。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// Various Dev Server settings</span></span><br><span class="line">    host: <span class="string">'localhost'</span>, <span class="comment">// can be overwritten by process.env.HOST</span></span><br><span class="line">    port: <span class="number">4200</span>, <span class="comment">// can be overwritten by process.env.PORT, if port is in use, a free one will be determined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="更多参数"><a href="#更多参数" class="headerlink" title="更多参数"></a>更多参数</h3><p>dev-server 使用了非常强大的 http-proxy-middleware , http-proxy-middleware 基于 http-proxy 实现的，可以查看 http-proxy 的源码和文档:<a href="https://github.com/nodejitsu/node-http-proxy。" target="_blank" rel="noopener">https://github.com/nodejitsu/node-http-proxy。</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target：要使用url模块解析的url字符串</span><br><span class="line">forward：要使用url模块解析的url字符串</span><br><span class="line">agent：要传递给http（s）.request的对象（请参阅Node的https代理和http代理对象）</span><br><span class="line">ssl：要传递给https.createServer（）的对象</span><br><span class="line">ws：<span class="literal">true</span> / <span class="literal">false</span>，是否代理websockets</span><br><span class="line">xfwd：<span class="literal">true</span> / <span class="literal">false</span>，添加x-forward标头</span><br><span class="line">secure：<span class="literal">true</span> / <span class="literal">false</span>，是否验证SSL Certs</span><br><span class="line">toProxy：<span class="literal">true</span> / <span class="literal">false</span>，传递绝对URL作为路径（对代理代理很有用）</span><br><span class="line">prependPath：<span class="literal">true</span> / <span class="literal">false</span>，默认值：<span class="literal">true</span> - 指定是否要将目标的路径添加到代理路径</span><br><span class="line">ignorePath：<span class="literal">true</span> / <span class="literal">false</span>，默认值：<span class="literal">false</span> - 指定是否要忽略传入请求的代理路径（注意：如果需要，您必须附加/手动）。</span><br><span class="line">localAddress：要为传出连接绑定的本地接口字符串</span><br><span class="line">changeOrigin：<span class="literal">true</span> / <span class="literal">false</span>，默认值：<span class="literal">false</span> - 将主机标头的原点更改为目标URL</span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="https://webpack.docschina.org/configuration/dev-server/#devserver-proxy" target="_blank" rel="noopener">官方文档</a></li>
+<li><a href="https://github.com/chimurai/http-proxy-middleware" target="_blank" rel="noopener">http-proxy-middleware</a></li>
+<li><a href="https://github.com/nodejitsu/node-http-proxy" target="_blank" rel="noopener">node-http-proxy</a></li>
+<li><a href="https://vuejs-templates.github.io/webpack/proxy.html" target="_blank" rel="noopener">API Proxying During Development</a></li>
+</ul>
+<p>转载自</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/f489e7764cb8" target="_blank" rel="noopener">Webpack-dev-server的proxy用法</a></li>
+</ul>
+
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/front-end/">前端</a>
+            
+            <a href="/tags/webpack/">WebPack</a>
+            
+        </div>
+        
+    </article>
+    
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在webpack-config-js中配置"><span class="toc-text">在webpack.config.js中配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用一"><span class="toc-text">使用一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用二"><span class="toc-text">使用二</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用三"><span class="toc-text">使用三</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用四"><span class="toc-text">使用四</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用五"><span class="toc-text">使用五</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决跨域原理"><span class="toc-text">解决跨域原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vue-cli中proxyTable配置接口地址代理示例"><span class="toc-text">vue-cli中proxyTable配置接口地址代理示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更多参数"><span class="toc-text">更多参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
+    </div>
+</aside>
+    
+    
+
+
+</div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="帮助">帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://warefz.github.io" target="_blank" rel="friend">ware_fz</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+<script src="/js/SimpleCore.js"></script>
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input" spellcheck="false" type="text" autocomplete="off" placeholder="请输入查询关键词">
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            buildingTime: '10/6/2019',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            donateImg: '/images/donate-qr.png',
+            snsQRCode: '/images/sns-qrcode.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        SimpleCore.init(jsi_config);
+        
+    });
+</script>
+</body>
+</html>

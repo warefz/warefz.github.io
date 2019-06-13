@@ -157,7 +157,7 @@
             </div>
             <h2 class="post-title">Echarts实现图表间联动</h2>
             <div class="post-meta">
-                本文共计4102个字 |
+                本文共计4638个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
@@ -175,6 +175,8 @@
 <p>ECharts 中支持的图表行为，通过 dispatchAction 触发<br><a href="https://www.echartsjs.com/api.html#action" target="_blank" rel="noopener">action</a></p>
 <p>在 ECharts 中主要通过 on 方法添加事件处理函数，该文档描述了所有 ECharts 的事件列表。<br><a href="https://www.echartsjs.com/api.html#events" target="_blank" rel="noopener">events</a></p>
 <p>之所以可以使用这个实现多图联动，实质上是一个图上发生鼠标移动事件后，调用另一个图，使其产生动作。比如mychart1和mychart2，如果获取到了mychart1的params信息，通过这些信息可以对应到mychart2的dataIndex、SeriesIndex，那么，就可以用这样的形式实现联动。</p>
+<h4 id="点击事件"><a href="#点击事件" class="headerlink" title="点击事件"></a>点击事件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myChart.on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">params</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(params);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>但是这个方法有一个不友好的地方就是只有用户点击到图中如：点、线、柱状图等上才可以触发点击事件，点击那一列的其他位置是没有作用的，因此我找到了另外一种方法实现这个需求，通过点击所在值的这一列就会触发（区域点击事件），实现代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">myChart.getZr().on(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">params</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> point=[params.offsetX,params.offsetY];</span><br><span class="line">    <span class="keyword">if</span>(myChart.containPixel(<span class="string">'gird'</span>,point))&#123;</span><br><span class="line">        <span class="keyword">let</span> xIndex=myChart.convertFromPixel(&#123;<span class="attr">seriesIndex</span>:<span class="number">0</span>&#125;,</span><br><span class="line">              point)[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">let</span> op=myChart.getOption();</span><br><span class="line">        <span class="keyword">let</span> name=op.xAxis[<span class="number">0</span>].data[xIndex];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <h4 id="myChart-setOption"><a href="#myChart-setOption" class="headerlink" title="myChart.setOption"></a>myChart.setOption</h4><p>重新绘制</p>
 <h4 id="myChart-dispatchAction"><a href="#myChart-dispatchAction" class="headerlink" title="myChart.dispatchAction"></a>myChart.dispatchAction</h4><p>触发图表行为，例如图例开关legendToggleSelect, 数据区域缩放dataZoom，显示提示框showTip等等，更多见官方文档。</p>
 <p>payload 参数可以通过batch属性同时触发多个行为。</p>
@@ -207,7 +209,7 @@
         <strong class="sidebar-title">
             目录
         </strong>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#connect"><span class="toc-text">connect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataset"><span class="toc-text">dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过事件"><span class="toc-text">通过事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#myChart-setOption"><span class="toc-text">myChart.setOption</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#myChart-dispatchAction"><span class="toc-text">myChart.dispatchAction</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#connect"><span class="toc-text">connect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataset"><span class="toc-text">dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过事件"><span class="toc-text">通过事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#点击事件"><span class="toc-text">点击事件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#myChart-setOption"><span class="toc-text">myChart.setOption</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#myChart-dispatchAction"><span class="toc-text">myChart.dispatchAction</span></a></li></ol></li></ol>
     </div>
 </aside>
     

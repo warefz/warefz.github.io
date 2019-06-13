@@ -786,7 +786,7 @@ img.alignright {
     margin:0 0 0 15px
 }
 .single #body {
-    margin-left:17.5%;
+    margin-left:10%;
     float:none
 }
 .single .footer {
@@ -1627,4 +1627,48 @@ pre .coffeescript .javascript,pre .javascript .xml,pre .tex .formula,pre .xml .j
     .adsense_post_right {
         display: none;
     }
+}
+
+#article-toc-inner:after,#article-toc-inner:before,.inner:after,.inner:before {
+    content: "";
+    display: table
+}
+
+#article-toc-inner:after,.inner:after {
+    clear: both
+}
+
+@media screen {
+    #article-toc-inner,.inner {
+        padding: 0 20px
+    }
+}
+#article-toc {
+    display: none;
+    float: right;
+    width: 22.5%;
+    margin-right: -10px;
+    opacity: .8
+}
+@media screen and (min-width:769px) {
+    #article-toc {
+        display: block
+    }
+}
+#article-toc.fixed {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 20px;
+    padding-top: 55px;
+}
+.fixed #article-toc-inner {
+    position: fixed;
+    width: 220px;
+    top: 0;
+    bottom: 0;
+    padding-top: 55px;
+}
+#article-toc-inner ol {
+    margin-left: -16px;
 }

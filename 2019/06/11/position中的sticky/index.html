@@ -157,18 +157,18 @@
             </div>
             <h2 class="post-title">position中的sticky</h2>
             <div class="post-meta">
-                本文共计1492个字 |
+                本文共计1504个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <p>CSS的position有如下几种属性：</p>
+            <h3 id="CSS-Position"><a href="#CSS-Position" class="headerlink" title="CSS Position"></a>CSS Position</h3><p>CSS的position有如下几种属性：</p>
 <h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>该关键字指定元素使用正常的布局行为，即元素在文档常规流中当前的布局位置。此时 top, right, bottom, left 和 z-index 属性无效。</p>
 <h4 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h4><p>该关键字下，元素先放置在未添加定位时的位置，再在不改变页面布局的前提下调整元素位置（因此会在此元素未添加定位时所在位置留下空白）。position:relative 对 table-*-group, table-row, table-column, table-cell, table-caption 元素无效。</p>
 <h4 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h4><p>不为元素预留空间，通过指定元素相对于最近的非 static 定位祖先元素的偏移，来确定元素位置。绝对定位的元素可以设置外边距（margins），且不会与其他边距合并。</p>
 <h4 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h4><p>不为元素预留空间，而是通过指定元素相对于屏幕视口（viewport）的位置来指定元素位置。元素的位置在屏幕滚动时不会改变。打印时，元素会出现在的每页的固定位置。fixed 属性会创建新的层叠上下文。当元素祖先的 transform  属性非 none 时，容器由视口改为该祖先。</p>
 <h4 id="sticky"><a href="#sticky" class="headerlink" title="sticky"></a>sticky</h4><p>盒位置根据正常流计算(这称为正常流动中的位置)，然后相对于该元素在流中的 flow root（BFC）和 containing block（最近的块级祖先元素）定位。在所有情况下（即便被定位元素为 table 时），该元素定位均不对后续元素造成影响。当元素 B 被粘性定位时，后续元素的位置仍按照 B 未定位时的位置来确定。position: sticky 对 table 元素的效果与 position: relative 相同。</p>
-<h3 id="position-sticky"><a href="#position-sticky" class="headerlink" title="position:sticky"></a>position:sticky</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nav&#123;</span><br><span class="line">  position:sticky;</span><br><span class="line">  top:10px; /* 阈值 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="position-sticky"><a href="#position-sticky" class="headerlink" title="position:sticky"></a>position:sticky</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span>&#123;</span><br><span class="line">  <span class="attribute">position</span>:sticky;</span><br><span class="line">  <span class="attribute">top</span>:<span class="number">10px</span>; <span class="comment">/* 阈值 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>position属性中最有意思的就是sticky了，设置了sticky的元素，在屏幕范围（viewport）时该元素的位置并不受到定位影响（设置是top、left等属性无效），当该元素的位置将要移出偏移范围时，定位又会变成fixed，根据设置的left、top等属性成固定位置的效果。</p>
 <h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ul>
 <li>该元素并不脱离文档流，任然保留元素原本在文档流的位置 </li>
@@ -201,6 +201,14 @@
     
     
 
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-Position"><span class="toc-text">CSS Position</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#relative"><span class="toc-text">relative</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#absolute"><span class="toc-text">absolute</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fixed"><span class="toc-text">fixed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sticky"><span class="toc-text">sticky</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position-sticky"><span class="toc-text">position:sticky</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本用法"><span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生效条件"><span class="toc-text">生效条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#兼容性"><span class="toc-text">兼容性</span></a></li></ol></li></ol>
+    </div>
+</aside>
     
     
 

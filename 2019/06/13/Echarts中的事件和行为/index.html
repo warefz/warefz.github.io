@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://warefz.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://warefz.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://warefz.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//warefz.disqus.com">
+    <link rel="prefetch" href="//disqus.com">
+    <link rel="prefetch" href="//warefz.disqus.com">
+
+
+<link rel="prerender" href="https://warefz.github.io">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://warefz.github.io">
+<meta name="author" content="ware_fz">
+<link rel="stylesheet" href="/css/JSimple.css">
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>echarts实现图表间联动 - 记</title>
+
+<meta name="keywords" content>
+
+<meta name="description " content>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+</head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-telegram"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">ware_fz</h1>
+        <h3 class="cover-siteTitle">用文字记录生活</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-telegram">
+        <a href target="_blank" title="telegram" ref="friend">
+            <i class="fa fa-telegram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-instagram">
+        <a href target="_blank" title="instagram" ref="friend">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/warefz" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-06-13">2019-06-13</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">Echarts实现图表间联动</h2>
+            <div class="post-meta">
+                本文共计4102个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <h3 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h3><p>Echarts.js目前已经提供了connect功能，只要图标的legend一样，那么就能实现联动。<br>例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myChart1 = <span class="keyword">this</span>.$echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main1'</span>));</span><br><span class="line"><span class="keyword">var</span> myChart2 = <span class="keyword">this</span>.$echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main2'</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> option = &#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: <span class="string">'ECharts 入门示例'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: <span class="string">'axis'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    toolbox: &#123;</span><br><span class="line">        show : <span class="literal">true</span>,</span><br><span class="line">        feature : &#123;</span><br><span class="line">            mark : &#123;<span class="attr">show</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">            dataView : &#123;<span class="attr">show</span>: <span class="literal">true</span>, <span class="attr">readOnly</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">            magicType : &#123;<span class="attr">show</span>: <span class="literal">true</span>, <span class="attr">type</span>: [<span class="string">'line'</span>, <span class="string">'bar'</span>, <span class="string">'stack'</span>, <span class="string">'tiled'</span>]&#125;,</span><br><span class="line">            restore : &#123;<span class="attr">show</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">            saveAsImage : &#123;<span class="attr">show</span>: <span class="literal">true</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    legend: &#123;</span><br><span class="line">        data:[<span class="string">'销量'</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    xAxis: &#123;</span><br><span class="line">        data: [<span class="string">"衬衫"</span>,<span class="string">"羊毛衫"</span>,<span class="string">"雪纺衫"</span>,<span class="string">"裤子"</span>,<span class="string">"高跟鞋"</span>,<span class="string">"袜子"</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    yAxis: &#123;&#125;,</span><br><span class="line">    series: [&#123;</span><br><span class="line">        name: <span class="string">'销量'</span>,</span><br><span class="line">        type: <span class="string">'line'</span>,</span><br><span class="line">        data: [<span class="number">5</span>, <span class="number">20</span>, <span class="number">36</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">20</span>]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myChart1.setOption(option);</span><br><span class="line">myChart2.setOption(option);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制联动的</span></span><br><span class="line"><span class="keyword">this</span>.$echarts.connect([myChart1,myChart2]);</span><br></pre></td></tr></table></figure></p>
+<p>效果如下面的示例图，当鼠标经过图1的时候，这个时候有提示，然后让图2的提示也显示出来<br><img src="/img/echarts-connect.png" alt></p>
+<p>如何关联？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分别设置每个实例的 group id</span></span><br><span class="line">chart1.group = <span class="string">'group1'</span>;</span><br><span class="line">chart2.group = <span class="string">'group1'</span>;</span><br><span class="line">echarts.connect(<span class="string">'group1'</span>);</span><br><span class="line"><span class="comment">// 或者可以直接传入需要联动的实例数组</span></span><br><span class="line">echarts.connect([chart1, chart2]);</span><br></pre></td></tr></table></figure></p>
+<h3 id="dataset"><a href="#dataset" class="headerlink" title="dataset"></a>dataset</h3><p>ECharts 4 开始支持了 dataset 组件用于单独的数据集声明，从而数据可以单独管理，被多个组件复用，并且可以基于数据指定数据到视觉的映射。这在不少场景下能带来使用上的方便。<br>dataset简单示例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">option = &#123;</span><br><span class="line">    legend: &#123;&#125;,</span><br><span class="line">    tooltip: &#123;&#125;,</span><br><span class="line">    dataset: &#123;</span><br><span class="line">        <span class="comment">// 提供一份数据。</span></span><br><span class="line">        source: [</span><br><span class="line">            [<span class="string">'product'</span>, <span class="string">'2015'</span>, <span class="string">'2016'</span>, <span class="string">'2017'</span>],</span><br><span class="line">            [<span class="string">'Matcha Latte'</span>, <span class="number">43.3</span>, <span class="number">85.8</span>, <span class="number">93.7</span>],</span><br><span class="line">            [<span class="string">'Milk Tea'</span>, <span class="number">83.1</span>, <span class="number">73.4</span>, <span class="number">55.1</span>],</span><br><span class="line">            [<span class="string">'Cheese Cocoa'</span>, <span class="number">86.4</span>, <span class="number">65.2</span>, <span class="number">82.5</span>],</span><br><span class="line">            [<span class="string">'Walnut Brownie'</span>, <span class="number">72.4</span>, <span class="number">53.9</span>, <span class="number">39.1</span>]</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 声明一个 X 轴，类目轴（category）。默认情况下，类目轴对应到 dataset 第一列。</span></span><br><span class="line">    xAxis: &#123;<span class="attr">type</span>: <span class="string">'category'</span>&#125;,</span><br><span class="line">    <span class="comment">// 声明一个 Y 轴，数值轴。</span></span><br><span class="line">    yAxis: &#123;&#125;,</span><br><span class="line">    <span class="comment">// 声明多个 bar 系列，默认情况下，每个系列会自动对应到 dataset 的每一列。</span></span><br><span class="line">    series: [</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">type</span>: <span class="string">'bar'</span>&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>效果图如下：<br><img src="/img/echarts-dataset-link.png" alt><br><a href="http://echarts.baidu.com/examples/editor.html?c=dataset-link" target="_blank" rel="noopener">来源 http://echarts.baidu.com/examples/editor.html?c=dataset-link</a></p>
+<p>在这个样例中，随着鼠标在坐标轴上的移动，饼图会不断的变化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">myChart.on(<span class="string">'updateAxisPointer'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xAxisInfo = event.axesInfo[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">if</span> (xAxisInfo) &#123;</span><br><span class="line">        <span class="keyword">var</span> dimension = xAxisInfo.value + <span class="number">1</span>;</span><br><span class="line">        myChart.setOption(&#123;</span><br><span class="line">            series: &#123;</span><br><span class="line">                id: <span class="string">'pie'</span>,</span><br><span class="line">                label: &#123;</span><br><span class="line">                    formatter: <span class="string">'&#123;b&#125;: &#123;@['</span> + dimension + <span class="string">']&#125; (&#123;d&#125;%)'</span></span><br><span class="line">                &#125;,</span><br><span class="line">                encode: &#123;</span><br><span class="line">                    value: dimension,</span><br><span class="line">                    tooltip: dimension</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>本质上是通过鼠标事件，不断获取xAxisInfo，然后根据获取到的xAxisInfo.value(dimension)重新绘制饼图。这个可视化过程中数据是以数据集形式呈现的，所以用的encode，具体介绍可以在<a href="https://www.echartsjs.com/tutorial.html#%E4%BD%BF%E7%94%A8%20dataset%20%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE" target="_blank" rel="noopener">https://www.echartsjs.com/tutorial.html#%E4%BD%BF%E7%94%A8%20dataset%20%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE</a> 看到。</p>
+<h3 id="通过事件"><a href="#通过事件" class="headerlink" title="通过事件"></a>通过事件</h3><p><a href="https://www.echartsjs.com/tutorial.html#ECharts%20%E4%B8%AD%E7%9A%84%E4%BA%8B%E4%BB%B6%E5%92%8C%E8%A1%8C%E4%B8%BA" target="_blank" rel="noopener">Echarts事件介绍</a></p>
+<p>ECharts 中的事件分为两种，一种是鼠标事件，在鼠标点击某个图形上会触发，还有一种是 调用 dispatchAction 后触发的事件。</p>
+<p>ECharts 中支持的图表行为，通过 dispatchAction 触发<br><a href="https://www.echartsjs.com/api.html#action" target="_blank" rel="noopener">action</a></p>
+<p>在 ECharts 中主要通过 on 方法添加事件处理函数，该文档描述了所有 ECharts 的事件列表。<br><a href="https://www.echartsjs.com/api.html#events" target="_blank" rel="noopener">events</a></p>
+<p>之所以可以使用这个实现多图联动，实质上是一个图上发生鼠标移动事件后，调用另一个图，使其产生动作。比如mychart1和mychart2，如果获取到了mychart1的params信息，通过这些信息可以对应到mychart2的dataIndex、SeriesIndex，那么，就可以用这样的形式实现联动。</p>
+<h4 id="myChart-setOption"><a href="#myChart-setOption" class="headerlink" title="myChart.setOption"></a>myChart.setOption</h4><p>重新绘制</p>
+<h4 id="myChart-dispatchAction"><a href="#myChart-dispatchAction" class="headerlink" title="myChart.dispatchAction"></a>myChart.dispatchAction</h4><p>触发图表行为，例如图例开关legendToggleSelect, 数据区域缩放dataZoom，显示提示框showTip等等，更多见官方文档。</p>
+<p>payload 参数可以通过batch属性同时触发多个行为。</p>
+<blockquote>
+<p>注：在 ECharts 2.x 是通过 myChart.component.tooltip.showTip 这种形式调用相应的接口触发图表行为，入口很深，而且涉及到内部组件的组织。因此在 ECharts 3 里统一改为 dispatchAction 的形式。</p>
+</blockquote>
+<p>示例:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">myChart.dispatchAction(&#123;</span><br><span class="line">    type: <span class="string">'dataZoom'</span>,</span><br><span class="line">    start: <span class="number">20</span>,</span><br><span class="line">    end: <span class="number">30</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 可以通过 batch 参数批量分发多个 action</span></span><br><span class="line">myChart.dispatchAction(&#123;</span><br><span class="line">    type: <span class="string">'dataZoom'</span>,</span><br><span class="line">    batch: [&#123;</span><br><span class="line">        <span class="comment">// 第一个 dataZoom 组件</span></span><br><span class="line">        start: <span class="number">20</span>,</span><br><span class="line">        end: <span class="number">30</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        <span class="comment">// 第二个 dataZoom 组件</span></span><br><span class="line">        dataZoomIndex: <span class="number">1</span>,</span><br><span class="line">        start: <span class="number">10</span>,</span><br><span class="line">        end: <span class="number">20</span></span><br><span class="line">    &#125;]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/front-end/">前端</a>
+            
+        </div>
+        
+    </article>
+    
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#connect"><span class="toc-text">connect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataset"><span class="toc-text">dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过事件"><span class="toc-text">通过事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#myChart-setOption"><span class="toc-text">myChart.setOption</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#myChart-dispatchAction"><span class="toc-text">myChart.dispatchAction</span></a></li></ol></li></ol>
+    </div>
+</aside>
+    
+    
+
+
+</div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="帮助">帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/sitemap.xml" title="地图">地图</a>
+        </p>
+        <p>
+            本站已建立&nbsp<a href="/timeline" id="siteBuildingTime"></a>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br>
+            ©2017-<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://warefz.github.io" target="_blank" rel="friend">ware_fz</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+<script src="/js/SimpleCore.js"></script>
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input" spellcheck="false" type="text" autocomplete="off" placeholder="请输入查询关键词">
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            buildingTime: '10/6/2019',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            donateImg: '/images/donate-qr.png',
+            snsQRCode: '/images/sns-qrcode.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        SimpleCore.init(jsi_config);
+        
+    });
+</script>
+</body>
+</html>

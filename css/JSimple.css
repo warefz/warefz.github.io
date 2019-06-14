@@ -572,6 +572,9 @@ body {
 .post-content {
     padding-bottom:10px
 }
+.post .tag-img img{
+    max-width: 100%;
+}
 .post-tool {
     text-align:center;
     padding:10px 0
@@ -610,8 +613,8 @@ body {
 }
 .page-number {
     display:inline-block;
-    margin:0 5px;
-    padding:0 10px;
+    margin:0 4px;
+    padding:4px 10px;
     text-align:center;
     color:#333
 }
@@ -619,8 +622,8 @@ body {
     background:#EEE;
     font-weight:bolder
 }
-.page-number:hover {
-    color:#e78170 !important;
+.page-number:not(.current):hover {
+    color:#e4393c !important;
     background:#EEE !important;
     text-decoration:none !important
 }
@@ -637,7 +640,10 @@ body {
 }
 .tag-list li {
     display:inline-block;
-    width:24%
+    width:24%;
+}
+.tag-list li a{
+    white-space: nowrap;
 }
 .flinks li {
     width:32%

@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://warefz.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://warefz.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://warefz.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//warefz.disqus.com">
+    <link rel="prefetch" href="//disqus.com">
+    <link rel="prefetch" href="//warefz.disqus.com">
+
+
+<link rel="prerender" href="https://warefz.github.io">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://warefz.github.io">
+<meta name="author" content="ware_fz">
+<link rel="stylesheet" href="/css/JSimple.css">
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>前端图片格式转换 - 记</title>
+
+<meta name="keywords" content>
+
+<meta name="description " content="前端图片格式转换（base64/blob/二进制/canvas）">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+</head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-telegram"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">ware_fz</h1>
+        <h3 class="cover-siteTitle">用文字记录生活</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-telegram">
+        <a href target="_blank" title="telegram" ref="friend">
+            <i class="fa fa-telegram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-instagram">
+        <a href target="_blank" title="instagram" ref="friend">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/warefz" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-06-14">2019-06-14</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">前端图片格式转换</h2>
+            <div class="post-meta">
+                本文共计2254个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <h3 id="图片文件转base64"><a href="#图片文件转base64" class="headerlink" title="图片文件转base64"></a>图片文件转base64</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">change(file) &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span>,base64 = <span class="literal">null</span></span><br><span class="line">        fr = <span class="keyword">new</span> FileReader();</span><br><span class="line">    fr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        base64 = fr.result;</span><br><span class="line">    &#125;;</span><br><span class="line">    fr.readAsDataURL(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="base64转2进制"><a href="#base64转2进制" class="headerlink" title="base64转2进制"></a>base64转2进制</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">change(data, mime) &#123;</span><br><span class="line">	data = data.split(<span class="string">','</span>)[<span class="number">1</span>];</span><br><span class="line">	data = <span class="built_in">window</span>.atob(data);</span><br><span class="line">	<span class="keyword">let</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(data.length);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">		ia[i] = data.charCodeAt(i);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Blob([ia], &#123;</span><br><span class="line">		type: mime</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="2进制转base64"><a href="#2进制转base64" class="headerlink" title="2进制转base64"></a>2进制转base64</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">change(bytes)&#123;</span><br><span class="line">    <span class="keyword">let</span> bString = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>, len = bytes.length; i &lt; len; ++i)&#123;</span><br><span class="line">        bString += <span class="built_in">String</span>.fromCharCode(bytes[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> btoa(bString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="canvas绘制和压缩图片"><a href="#canvas绘制和压缩图片" class="headerlink" title="canvas绘制和压缩图片"></a>canvas绘制和压缩图片</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">paint(base64, bili, callback) &#123;</span><br><span class="line">    <span class="keyword">let</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.src = base64;</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);</span><br><span class="line">        <span class="keyword">let</span> w = <span class="keyword">this</span>.width / bili;</span><br><span class="line">        <span class="keyword">let</span> h = <span class="keyword">this</span>.height / bili;</span><br><span class="line">        canvas.setAttribute(<span class="string">"width"</span>, w);</span><br><span class="line">        canvas.setAttribute(<span class="string">"height"</span>, h);</span><br><span class="line">        canvas.getContext(<span class="string">"2d"</span>).drawImage(<span class="keyword">this</span>, <span class="number">0</span>, <span class="number">0</span>, w, h);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="canvas转base64"><a href="#canvas转base64" class="headerlink" title="canvas转base64"></a>canvas转base64</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">let</span> base64 = canvas.toDataURL(<span class="string">"image/png"</span>);</span><br><span class="line"><span class="comment">//还可以传个参数做图片质量的设置，在指定图片格式为 image/jpeg 或 image/webp的情况下，可以从 0 到 1 的区间内选择图片的质量。如果超出取值范围，将会使用默认值 0.92</span></span><br></pre></td></tr></table></figure>
+<h3 id="canvas转blob"><a href="#canvas转blob" class="headerlink" title="canvas转blob"></a>canvas转blob</h3><blockquote>
+<p>HTMLCanvasElement.toBlob() 方法创造Blob对象，用以展示canvas上的图片</p>
+</blockquote>
+<p>void canvas.toBlob(callback, type, encoderOptions);</p>
+<ul>
+<li>callback<br>回调函数，可获得一个单独的Blob对象参数。</li>
+<li>type 可选<br>DOMString类型，指定图片格式，默认格式为image/png。</li>
+<li>encoderOptions 可选<br>Number类型，值在0与1之间，当请求图片格式为image/jpeg或者image/webp时用来指定图片展示质量。如果这个参数的值不在指定类型与范围之内，则使用默认值，其余参数将被忽略。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">canvas.toBlob(<span class="function"><span class="keyword">function</span>(<span class="params">blob</span>) </span>&#123;</span><br><span class="line">&#125;, <span class="string">"image/jpeg"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="base64转blob"><a href="#base64转blob" class="headerlink" title="base64转blob"></a>base64转blob</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">dataURItoBlob(base64Data) &#123;</span><br><span class="line">    <span class="keyword">let</span> byteString;</span><br><span class="line">    <span class="keyword">if</span>(base64Data.split(<span class="string">','</span>)[<span class="number">0</span>].indexOf(<span class="string">'base64'</span>) &gt;= <span class="number">0</span>)</span><br><span class="line">        byteString = atob(base64Data.split(<span class="string">','</span>)[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        byteString = <span class="built_in">unescape</span>(base64Data.split(<span class="string">','</span>)[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">let</span> mimeString = base64Data.split(<span class="string">','</span>)[<span class="number">0</span>].split(<span class="string">':'</span>)[<span class="number">1</span>].split(<span class="string">';'</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(byteString.length);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</span><br><span class="line">        ia[i] = byteString.charCodeAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Blob([ia], &#123;</span><br><span class="line">        type: mimeString</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/front-end/">前端</a>
+            
+        </div>
+        
+    </article>
+    
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#图片文件转base64"><span class="toc-text">图片文件转base64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base64转2进制"><span class="toc-text">base64转2进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2进制转base64"><span class="toc-text">2进制转base64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#canvas绘制和压缩图片"><span class="toc-text">canvas绘制和压缩图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#canvas转base64"><span class="toc-text">canvas转base64</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#canvas转blob"><span class="toc-text">canvas转blob</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base64转blob"><span class="toc-text">base64转blob</span></a></li></ol>
+    </div>
+</aside>
+    
+    
+
+
+</div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="帮助">帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- <a href="/sitemap.xml" title="地图">地图</a> -->
+        </p>
+        <p>
+            本站已建立&nbsp<span id="siteBuildingTime"></span>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br>
+            ©<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://warefz.github.io" target="_blank" rel="friend">ware_fz</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+<script src="/js/SimpleCore.js"></script>
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input" spellcheck="false" type="text" autocomplete="off" placeholder="请输入查询关键词">
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            buildingTime: '2019/06/10',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            donateImg: '/images/donate-qr.png',
+            snsQRCode: '/images/sns-qrcode.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        SimpleCore.init(jsi_config);
+        
+    });
+</script>
+</body>
+</html>

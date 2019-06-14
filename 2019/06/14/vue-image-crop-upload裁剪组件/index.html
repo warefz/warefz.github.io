@@ -1,0 +1,273 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://warefz.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://warefz.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://warefz.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//warefz.disqus.com">
+    <link rel="prefetch" href="//disqus.com">
+    <link rel="prefetch" href="//warefz.disqus.com">
+
+
+<link rel="prerender" href="https://warefz.github.io">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://warefz.github.io">
+<meta name="author" content="ware_fz">
+<link rel="stylesheet" href="/css/JSimple.css">
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>vue-image-crop-upload裁剪组件 - 记</title>
+
+<meta name="keywords" content>
+
+<meta name="description " content="一个好用的vue图片裁剪上传组件">
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+</head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-telegram"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">ware_fz</h1>
+        <h3 class="cover-siteTitle">用文字记录生活</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-telegram">
+        <a href target="_blank" title="telegram" ref="friend">
+            <i class="fa fa-telegram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-instagram">
+        <a href target="_blank" title="instagram" ref="friend">
+            <i class="fa fa-instagram"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/warefz" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-06-14">2019-06-14</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">vue-image-crop-upload裁剪组件</h2>
+            <div class="post-meta">
+                本文共计4114个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p><img src="/img/vicp1.png" alt="效果图"></p>
+<p>npm地址<a href="https://www.npmjs.com/package/vue-image-crop-upload" target="_blank" rel="noopener">https://www.npmjs.com/package/vue-image-crop-upload</a></p>
+<p>git地址<a href="https://github.com/dai-siki/vue-image-crop-upload" target="_blank" rel="noopener">https://github.com/dai-siki/vue-image-crop-upload</a></p>
+<p>样例地址<a href="https://dai-siki.github.io/vue-image-crop-upload/example/demo.html" target="_blank" rel="noopener">https://dai-siki.github.io/vue-image-crop-upload/example/demo.html</a></p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">upload() &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="keyword">this</span>,</span><br><span class="line">        &#123;</span><br><span class="line">            lang,</span><br><span class="line">            imgFormat,</span><br><span class="line">            mime,</span><br><span class="line">            url,</span><br><span class="line">            params,</span><br><span class="line">            headers,</span><br><span class="line">            field,</span><br><span class="line">            ki,</span><br><span class="line">            createImgUrl,</span><br><span class="line">            withCredentials</span><br><span class="line">        &#125; = <span class="keyword">this</span>,</span><br><span class="line">        fmData = <span class="keyword">new</span> FormData();</span><br><span class="line">    fmData.append(field, data2blob(createImgUrl, mime), field + <span class="string">'.'</span> + imgFormat);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加其他参数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> params == <span class="string">'object'</span> &amp;&amp; params) &#123;</span><br><span class="line">        <span class="built_in">Object</span>.keys(params).forEach(<span class="function">(<span class="params">k</span>) =&gt;</span> &#123;</span><br><span class="line">            fmData.append(k, params[k]);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 监听进度回调</span></span><br><span class="line">    <span class="keyword">const</span> uploadProgress = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (event.lengthComputable) &#123;</span><br><span class="line">            that.progress = <span class="number">100</span> * <span class="built_in">Math</span>.round(event.loaded) / event.total;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 上传文件</span></span><br><span class="line">    that.reset();</span><br><span class="line">    that.loading = <span class="number">1</span>;</span><br><span class="line">    that.setStep(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> client = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        client.open(<span class="string">'POST'</span>, url, <span class="literal">true</span>);</span><br><span class="line">        client.withCredentials = withCredentials;</span><br><span class="line">        client.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.readyState !== <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.status === <span class="number">200</span> || <span class="keyword">this</span>.status === <span class="number">201</span>) &#123;</span><br><span class="line">                resolve(<span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.responseText));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                reject(<span class="keyword">this</span>.status);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        client.upload.addEventListener(<span class="string">'progress'</span>, uploadProgress, <span class="literal">false</span>); <span class="comment">//监听进度</span></span><br><span class="line">        <span class="comment">// 设置header</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> headers == <span class="string">'object'</span> &amp;&amp; headers) &#123;</span><br><span class="line">            <span class="built_in">Object</span>.keys(headers).forEach(<span class="function">(<span class="params">k</span>) =&gt;</span> &#123;</span><br><span class="line">                client.setRequestHeader(k, headers[k]);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        client.send(fmData);</span><br><span class="line">    &#125;).then(</span><br><span class="line">        <span class="comment">// 上传成功</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span>(<span class="params">resData</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (that.value) &#123;</span><br><span class="line">                that.loading = <span class="number">2</span>;</span><br><span class="line">                that.$emit(<span class="string">'crop-upload-success'</span>, resData, field, ki);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">		<span class="comment">// 上传失败</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span>(<span class="params">sts</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (that.value) &#123;</span><br><span class="line">                that.loading = <span class="number">3</span>;</span><br><span class="line">                that.hasError = <span class="literal">true</span>;</span><br><span class="line">                that.errorMsg = lang.fail;</span><br><span class="line">                that.$emit(<span class="string">'crop-upload-fail'</span>, sts, field, ki);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="点击波纹效果"><a href="#点击波纹效果" class="headerlink" title="点击波纹效果"></a>点击波纹效果</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">e, arg_opts</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> opts = <span class="built_in">Object</span>.assign(&#123;</span><br><span class="line">			ele: e.target, <span class="comment">// 波纹作用元素</span></span><br><span class="line">			type: <span class="string">'hit'</span>, <span class="comment">// hit点击位置扩散　center中心点扩展</span></span><br><span class="line">			bgc: <span class="string">'rgba(0, 0, 0, 0.15)'</span> <span class="comment">// 波纹颜色</span></span><br><span class="line">		&#125;, arg_opts),</span><br><span class="line">		target = opts.ele;</span><br><span class="line">	<span class="keyword">if</span> (target) &#123;</span><br><span class="line">		<span class="keyword">var</span> rect = target.getBoundingClientRect(),</span><br><span class="line">			ripple = target.querySelector(<span class="string">'.e-ripple'</span>);</span><br><span class="line">		<span class="keyword">if</span> (!ripple) &#123;</span><br><span class="line">			ripple = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>);</span><br><span class="line">			ripple.className = <span class="string">'e-ripple'</span>;</span><br><span class="line">			ripple.style.height = ripple.style.width = <span class="built_in">Math</span>.max(rect.width, rect.height) + <span class="string">'px'</span>;</span><br><span class="line">			target.appendChild(ripple);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			ripple.className = <span class="string">'e-ripple'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">switch</span> (opts.type) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'center'</span>:</span><br><span class="line">				ripple.style.top = (rect.height / <span class="number">2</span> - ripple.offsetHeight / <span class="number">2</span>) + <span class="string">'px'</span>;</span><br><span class="line">				ripple.style.left = (rect.width / <span class="number">2</span> - ripple.offsetWidth / <span class="number">2</span>) + <span class="string">'px'</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				ripple.style.top = (e.pageY - rect.top - ripple.offsetHeight / <span class="number">2</span> - <span class="built_in">document</span>.body.scrollTop) + <span class="string">'px'</span>;</span><br><span class="line">				ripple.style.left = (e.pageX - rect.left - ripple.offsetWidth / <span class="number">2</span> - <span class="built_in">document</span>.body.scrollLeft) + <span class="string">'px'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		ripple.style.backgroundColor = opts.bgc;</span><br><span class="line">		ripple.className = <span class="string">'e-ripple z-active'</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="base64转2进制"><a href="#base64转2进制" class="headerlink" title="base64转2进制"></a>base64转2进制</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">data, mime</span>) </span>&#123;</span><br><span class="line">	data = data.split(<span class="string">','</span>)[<span class="number">1</span>];</span><br><span class="line">	data = <span class="built_in">window</span>.atob(data);</span><br><span class="line">	<span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(data.length);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span><br><span class="line">		ia[i] = data.charCodeAt(i);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="comment">// canvas.toDataURL 返回的默认格式就是 image/png</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> Blob([ia], &#123;</span><br><span class="line">		type: mime</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/front-end/">前端</a>
+            
+            <a href="/tags/vue/">Vue</a>
+            
+        </div>
+        
+    </article>
+    
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#拖拽"><span class="toc-text">拖拽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#点击波纹效果"><span class="toc-text">点击波纹效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#base64转2进制"><span class="toc-text">base64转2进制</span></a></li></ol></li></ol>
+    </div>
+</aside>
+    
+    
+
+
+</div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="帮助">帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- <a href="/sitemap.xml" title="地图">地图</a> -->
+        </p>
+        <p>
+            本站已建立&nbsp<span id="siteBuildingTime"></span>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br>
+            ©<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://warefz.github.io" target="_blank" rel="friend">ware_fz</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+<script src="/js/SimpleCore.js"></script>
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input" spellcheck="false" type="text" autocomplete="off" placeholder="请输入查询关键词">
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            buildingTime: '2019/06/10',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            donateImg: '/images/donate-qr.png',
+            snsQRCode: '/images/sns-qrcode.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        SimpleCore.init(jsi_config);
+        
+    });
+</script>
+</body>
+</html>

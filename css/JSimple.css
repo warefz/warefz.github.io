@@ -643,7 +643,11 @@ body {
     width:24%;
 }
 .tag-list li a{
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
+    width: 100%;
+    display: inline-block;
 }
 .flinks li {
     width:32%

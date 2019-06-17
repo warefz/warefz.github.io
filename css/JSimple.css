@@ -1656,7 +1656,7 @@ pre .coffeescript .javascript,pre .javascript .xml,pre .tex .formula,pre .xml .j
 #article-toc {
     display: none;
     float: right;
-    width: 22.5%;
+    width: 21.5%;
     margin-right: -10px;
     opacity: .8
 }
@@ -1681,4 +1681,10 @@ pre .coffeescript .javascript,pre .javascript .xml,pre .tex .formula,pre .xml .j
 }
 #article-toc-inner ol {
     margin-left: -16px;
+}
+#article-toc .sidebar-title{
+    font-size: 19px;
+}
+#article-toc .toc-item{
+    font-size: 15px;
 }

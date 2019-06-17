@@ -29,11 +29,11 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>产品学习 - 记</title>
+<title>前端页面通过拖拽选择文件 - 记</title>
 
 <meta name="keywords" content>
 
-<meta name="description " content="交互系统设计的目标可以从“可用性”和”用户体验“两个层面上进行分析，关注以人为本的用户需求">
+<meta name="description " content="通过处理拖拽事件可以让用户通过拖拽的方式将文件拖拽到应用中">
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -151,38 +151,33 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a href="https://warefz.github.io" target="_blank">ware_fz</a>
-                    <span title="最后编辑于&nbsp;2019-06-12">2019-06-12</span>
+                    <span title="最后编辑于&nbsp;2019-06-17">2019-06-17</span>
                 </p>
                 <p>自由</p>
             </div>
-            <h2 class="post-title">产品学习</h2>
+            <h2 class="post-title">前端页面通过拖拽选择文件</h2>
             <div class="post-meta">
-                本文共计168个字 |
+                本文共计1992个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <h3 id="交互学习"><a href="#交互学习" class="headerlink" title="交互学习"></a>交互学习</h3><ul>
-<li><a href="http://www.woshipm.com/ucd/1489258.html" target="_blank" rel="noopener">人机交互指南</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/35184751" target="_blank" rel="noopener">人机交互指南2018中文版</a></li>
-<li><a href="https://uiiiuiii.com/screen/ios.htm" target="_blank" rel="noopener">Ios设计规范</a></li>
-</ul>
-<h3 id="常用交互软件"><a href="#常用交互软件" class="headerlink" title="常用交互软件"></a>常用交互软件</h3><ul>
-<li>Axure</li>
-<li><a href="https://creative.adobe.com/zh-cn/products/download/xd" target="_blank" rel="noopener">XD</a></li>
-<li>Sketch用于小图标</li>
-<li>Xmind或Mindmanager</li>
-</ul>
-<h3 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h3><ul>
-<li>《触动人心》</li>
-<li>《启示录》</li>
-<li>《点石成金》</li>
-<li>《写给大家看的设计书》</li>
-<li>《交互设计之路》</li>
-<li>《情感化设计》</li>
-<li>《可用性工程》</li>
-<li>《简约至上：交互式设计四策略》</li>
-<li>《设计中的设计》</li>
+            <blockquote>
+<p>通过处理拖拽事件可以让用户通过拖拽的方式将文件拖拽到应用中</p>
+</blockquote>
+<p>第一步是创建一个drop区域。虽然你网页内容的哪部分接受拖放取决于你的应用设计，但是使一个元素接收drop事件是很容易的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dropbox;</span><br><span class="line"></span><br><span class="line">dropbox = <span class="built_in">document</span>.getElementById(<span class="string">"dropbox"</span>);</span><br><span class="line">dropbox.addEventListener(<span class="string">"dragenter"</span>, dragenter, <span class="literal">false</span>);</span><br><span class="line">dropbox.addEventListener(<span class="string">"dragover"</span>, dragover, <span class="literal">false</span>);</span><br><span class="line">dropbox.addEventListener(<span class="string">"drop"</span>, drop, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，我们将ID为dropbox的元素变为了我们的drop区域。这个只需要给元素添加dragenter, dragover, 和drop 事件监听器就完成。<br>我们其实并不需要对dragenter and dragover 事件进行处理，所以这些函数都很简单。他们只需要包括禁止事件传播和阻止默认事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragenter</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragover</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关键部分在drop()这个函数中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">  e.preventDefault();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> dt = e.dataTransfer;</span><br><span class="line">  <span class="keyword">var</span> files = dt.files;</span><br><span class="line"></span><br><span class="line">  handleFiles(files);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里，我们从事件中获取到了dataTransfer 这个域，然后从中得到文件列表，再将他们传递给handleFiles()函数。从这一点开始，处理文件的方法和用input元素或者用拖拽是一样的了。</p>
+<h3 id="dataTransfer"><a href="#dataTransfer" class="headerlink" title="dataTransfer"></a>dataTransfer</h3><p>在进行拖放操作时，DataTransfer 对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。</p>
+<p>拖放触发的拖放事件有一个dataTransfer属性，该属性值是一个DataTransfer对象，该对象包含如下属性和方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">dataTransfer.dropEffect：设置或返回拖放目标上允许发生的拖放行为。如果此设置的拖放行为不在effectAllowed属性设置的多种拖放行为之内，拖放操作将会失败。该属性值只允许none、copy、link、move值之一。</span><br><span class="line"></span><br><span class="line">dataTransfer.effectAllowed：设置或返回被拖动元素允许发生的拖动行为。该属性值可设置为none、copy、copyLink、copyMove、link、linkMove、move、all、uninitialized。</span><br><span class="line"></span><br><span class="line">dataTransfer.files：包含一个在数据传输上所有可用的本地文件列表。如果拖动操作不涉及拖动文件，此属性是一个空列表。此属性访问指定的FileList 中无效的索引将返回未定义（undefined）。</span><br><span class="line"></span><br><span class="line">dataTransfer.types：types节保存一个被存储数据的类型列表作为第一项，顺序与被添加数据的顺序一致。如果没有添加数据将返回一个空列表。</span><br><span class="line"></span><br><span class="line">dataTransfer.setDragImage(element x,y)：设置拖放操作的自定义图标。其中element设置自定义图标，x设置图标与鼠标在水平方向的距离；y设置图标与鼠标在垂直方向的距离。</span><br><span class="line"></span><br><span class="line">dataTransfer.addElement(element)：添加自定义图标。</span><br><span class="line"></span><br><span class="line">dataTransfer.getData(format)：获取DataTransfer对象中设置format格式的数据。其中format代表数据格式，data代表数据。</span><br><span class="line"></span><br><span class="line">dataTransfer.setData(type,data): 为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现有数据。</span><br><span class="line"></span><br><span class="line">dataTransfer.clearData([format])：清除DataTransfer对象中format格式的数据，如果省略format格式，则意味着清除DataTransfer对象中的全部数据。</span><br></pre></td></tr></table></figure>
+<p>参考</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransfer" target="_blank" rel="noopener">MDN DataTransfer</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/Using_files_from_web_applications" target="_blank" rel="noopener">Using files from web applications</a></li>
 </ul>
 
         </div>
@@ -194,7 +189,7 @@
         
         <div class="post-tags">标签：
             
-            <a href="/tags/interactive/">交互</a>
+            <a href="/tags/front-end/">前端</a>
             
         </div>
         
@@ -209,7 +204,7 @@
         <strong class="sidebar-title">
             目录
         </strong>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#交互学习"><span class="toc-text">交互学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用交互软件"><span class="toc-text">常用交互软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#书单"><span class="toc-text">书单</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#dataTransfer"><span class="toc-text">dataTransfer</span></a></li></ol>
     </div>
 </aside>
     

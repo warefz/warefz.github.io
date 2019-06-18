@@ -86,18 +86,6 @@
         <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
         <div class="cover-sns">
             
-    &nbsp;&nbsp;<div class="btn btn-telegram">
-        <a href target="_blank" title="telegram" ref="friend">
-            <i class="fa fa-telegram"></i>
-        </a>
-    </div>
-
-    &nbsp;&nbsp;<div class="btn btn-instagram">
-        <a href target="_blank" title="instagram" ref="friend">
-            <i class="fa fa-instagram"></i>
-        </a>
-    </div>
-
     &nbsp;&nbsp;<div class="btn btn-twitter">
         <a href target="_blank" title="twitter" ref="friend">
             <i class="fa fa-twitter"></i>
@@ -157,7 +145,7 @@
             </div>
             <h2 class="post-title">前端页面通过拖拽选择文件</h2>
             <div class="post-meta">
-                本文共计1992个字 |
+                本文共计1991个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
@@ -174,8 +162,7 @@
 <h3 id="dataTransfer"><a href="#dataTransfer" class="headerlink" title="dataTransfer"></a>dataTransfer</h3><p>在进行拖放操作时，DataTransfer 对象用来保存，通过拖放动作，拖动到浏览器的数据。它可以保存一项或多项数据、一种或者多种数据类型。</p>
 <p>拖放触发的拖放事件有一个dataTransfer属性，该属性值是一个DataTransfer对象，该对象包含如下属性和方法：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">dataTransfer.dropEffect：设置或返回拖放目标上允许发生的拖放行为。如果此设置的拖放行为不在effectAllowed属性设置的多种拖放行为之内，拖放操作将会失败。该属性值只允许none、copy、link、move值之一。</span><br><span class="line"></span><br><span class="line">dataTransfer.effectAllowed：设置或返回被拖动元素允许发生的拖动行为。该属性值可设置为none、copy、copyLink、copyMove、link、linkMove、move、all、uninitialized。</span><br><span class="line"></span><br><span class="line">dataTransfer.files：包含一个在数据传输上所有可用的本地文件列表。如果拖动操作不涉及拖动文件，此属性是一个空列表。此属性访问指定的FileList 中无效的索引将返回未定义（undefined）。</span><br><span class="line"></span><br><span class="line">dataTransfer.types：types节保存一个被存储数据的类型列表作为第一项，顺序与被添加数据的顺序一致。如果没有添加数据将返回一个空列表。</span><br><span class="line"></span><br><span class="line">dataTransfer.setDragImage(element x,y)：设置拖放操作的自定义图标。其中element设置自定义图标，x设置图标与鼠标在水平方向的距离；y设置图标与鼠标在垂直方向的距离。</span><br><span class="line"></span><br><span class="line">dataTransfer.addElement(element)：添加自定义图标。</span><br><span class="line"></span><br><span class="line">dataTransfer.getData(format)：获取DataTransfer对象中设置format格式的数据。其中format代表数据格式，data代表数据。</span><br><span class="line"></span><br><span class="line">dataTransfer.setData(type,data): 为一个给定的类型设置数据。如果该数据类型不存在，它将添加到的末尾，这样类型列表中的最后一个项目将是新的格式。如果已经存在的数据类型，替换相同的位置的现有数据。</span><br><span class="line"></span><br><span class="line">dataTransfer.clearData([format])：清除DataTransfer对象中format格式的数据，如果省略format格式，则意味着清除DataTransfer对象中的全部数据。</span><br></pre></td></tr></table></figure>
-<p>参考</p>
-<ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/DataTransfer" target="_blank" rel="noopener">MDN DataTransfer</a></li>
 <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/File/Using_files_from_web_applications" target="_blank" rel="noopener">Using files from web applications</a></li>
 </ul>
@@ -193,6 +180,24 @@
             
         </div>
         
+        <div class="post-nav">
+            
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/06/18/Vue使用key属性管理可复用元素/" rel="next" title="Vue使用key属性管理可复用元素">
+                    <i class="fa fa-chevron-left"></i> Vue使用key属性管理可复用元素
+                </a>
+            </div>
+            
+            <span class="post-nav-divider"></span>
+            
+            
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/17/Vue父组件和子组件间的方法调用/" rel="prev" title="Vue父组件和子组件间的方法调用">
+                    Vue父组件和子组件间的方法调用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
+        </div>
     </article>
     
     <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
@@ -204,7 +209,7 @@
         <strong class="sidebar-title">
             目录
         </strong>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#dataTransfer"><span class="toc-text">dataTransfer</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#dataTransfer"><span class="toc-text">dataTransfer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol>
     </div>
 </aside>
     

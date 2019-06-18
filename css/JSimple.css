@@ -607,6 +607,53 @@ body {
     background-color:#333;
     color:#fff
 }
+.post-nav {
+    display: table;
+    margin-top: 15px;
+    width: 100%;
+    border-top: 1px solid #eee;
+}
+.post-nav-divider {
+    display: table-cell;
+    width: 10%;
+}
+.post-nav-item {
+    display: table-cell;
+    padding: 10px 0 0 0;
+    width: 45%;
+    vertical-align: top;
+}
+.post-nav-item a {
+    position: relative;
+    display: block;
+    line-height: 25px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: none;
+}
+.post-nav-item a:hover {
+    color: #222;
+    border-bottom: none;
+}
+.post-nav-item .fa {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    font-size: 12px;
+}
+.post-nav-next a {
+    padding-left: 15px; 
+}
+.post-nav-prev {
+    text-align: right;
+}
+.post-nav-prev a {
+    padding-right: 15px;
+}
+.post-nav-prev .fa {
+    right: 0;
+    left: auto;
+}
 #btn-pager {
     text-align:center;
     margin-bottom:10px
@@ -646,7 +693,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 100%;
+    max-width: 100%;
     display: inline-block;
 }
 .flinks li {
@@ -1666,17 +1713,13 @@ pre .coffeescript .javascript,pre .javascript .xml,pre .tex .formula,pre .xml .j
     }
 }
 #article-toc.fixed {
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 100px;
     bottom: 0;
     right: 20px;
-    padding-top: 55px;
 }
 .fixed #article-toc-inner {
-    position: fixed;
     width: 220px;
-    top: 0;
-    bottom: 0;
     padding-top: 55px;
 }
 #article-toc-inner ol {

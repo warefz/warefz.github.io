@@ -45,9 +45,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> Vue </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -147,9 +147,9 @@
       
         <tags>
             
-            <tag> 前端 </tag>
-            
             <tag> Vue </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
@@ -310,33 +310,6 @@
     
     
     <entry>
-      <title>vue中watch用法</title>
-      <link href="/2019/06/11/vue%E4%B8%ADwatch%E7%94%A8%E6%B3%95/"/>
-      <url>/2019/06/11/vue%E4%B8%ADwatch%E7%94%A8%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<p>在vue中，使用watch来响应数据的变化。watch的用法大致有三种。下面代码是watch的一种简单的用法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"cityName"</span>/&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#root'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        cityName: <span class="string">'shanghai'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        cityName(newName, oldName) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>直接写一个监听处理函数，当每次监听到 cityName 值发生改变时，执行函数。也可以在所监听的数据后面直接加字符串形式的方法名：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    ...</span><br><span class="line">    watch: &#123;</span><br><span class="line">        cityName: <span class="string">'nameChange'</span></span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><h3 id="immediate和handler"><a href="#immediate和handler" class="headerlink" title="immediate和handler"></a>immediate和handler</h3><p>这样使用watch时有一个特点，就是当值第一次绑定的时候，不会执行监听函数，只有值发生改变才会执行。如果我们需要在最初绑定值的时候也执行函数，则就需要用到immediate属性。</p><p>比如当父组件向子组件动态传值时，子组件props首次获取到父组件传来的默认值时，也需要执行函数，此时就需要将immediate设为true。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#root'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    cityName: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    cityName: &#123;</span><br><span class="line">    　　handler(newName, oldName) &#123;</span><br><span class="line">      　　<span class="comment">// ...</span></span><br><span class="line">    　　&#125;,</span><br><span class="line">    　　immediate: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>监听的数据后面写成对象形式，包含handler方法和immediate，之前我们写的函数其实就是在写这个handler方法；<br>immediate表示在watch中首次绑定的时候，是否执行handler，值为true则表示在watch中声明的时候，就立即执行handler方法，值为false，则和一般使用watch一样，在数据发生变化的时候才执行handler。</p><h3 id="deep"><a href="#deep" class="headerlink" title="deep"></a>deep</h3><p>当需要监听一个对象的改变时，普通的watch方法无法监听到对象内部属性的改变，只有data中的数据才能够监听到变化，此时就需要deep属性对对象进行深度监听。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"cityName.name"</span>/&gt;</span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#root'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    cityName: &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">'shanghai'</span>&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    cityName: &#123;</span><br><span class="line">      handler(newName, oldName) &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;,</span><br><span class="line">    deep: <span class="literal">true</span>,</span><br><span class="line">    immediate: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>设置deep: true 则可以监听到cityName.name的变化，此时会给cityName的所有属性都加上这个监听器，当对象属性较多时，每个属性值的变化都会执行handler。如果只需要监听对象中的一个属性值，则可以做以下优化：使用字符串的形式监听对象属性：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  watch: &#123;</span><br><span class="line">    <span class="string">'cityName.name'</span>: &#123;</span><br><span class="line">      handler(newName, oldName) &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      &#125;,</span><br><span class="line">      deep: <span class="literal">true</span>,</span><br><span class="line">      immediate: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>这样只会给对象的某个特定的属性加监听器。</p><p>数组（一维、多维）的变化不需要通过深度监听，对象数组中对象的属性变化则需要deep深度监听。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> tech-notes </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 前端 </tag>
-            
-            <tag> Vue </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>vue修饰符</title>
       <link href="/2019/06/11/vue%E4%BF%AE%E9%A5%B0%E7%AC%A6/"/>
       <url>/2019/06/11/vue%E4%BF%AE%E9%A5%B0%E7%AC%A6/</url>
@@ -354,6 +327,33 @@
         <tags>
             
             <tag> Vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue中watch用法</title>
+      <link href="/2019/06/11/vue%E4%B8%ADwatch%E7%94%A8%E6%B3%95/"/>
+      <url>/2019/06/11/vue%E4%B8%ADwatch%E7%94%A8%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>在vue中，使用watch来响应数据的变化。watch的用法大致有三种。下面代码是watch的一种简单的用法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"cityName"</span>/&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#root'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        cityName: <span class="string">'shanghai'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        cityName(newName, oldName) &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>直接写一个监听处理函数，当每次监听到 cityName 值发生改变时，执行函数。也可以在所监听的数据后面直接加字符串形式的方法名：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    ...</span><br><span class="line">    watch: &#123;</span><br><span class="line">        cityName: <span class="string">'nameChange'</span></span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><h3 id="immediate和handler"><a href="#immediate和handler" class="headerlink" title="immediate和handler"></a>immediate和handler</h3><p>这样使用watch时有一个特点，就是当值第一次绑定的时候，不会执行监听函数，只有值发生改变才会执行。如果我们需要在最初绑定值的时候也执行函数，则就需要用到immediate属性。</p><p>比如当父组件向子组件动态传值时，子组件props首次获取到父组件传来的默认值时，也需要执行函数，此时就需要将immediate设为true。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#root'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    cityName: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    cityName: &#123;</span><br><span class="line">    　　handler(newName, oldName) &#123;</span><br><span class="line">      　　<span class="comment">// ...</span></span><br><span class="line">    　　&#125;,</span><br><span class="line">    　　immediate: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>监听的数据后面写成对象形式，包含handler方法和immediate，之前我们写的函数其实就是在写这个handler方法；<br>immediate表示在watch中首次绑定的时候，是否执行handler，值为true则表示在watch中声明的时候，就立即执行handler方法，值为false，则和一般使用watch一样，在数据发生变化的时候才执行handler。</p><h3 id="deep"><a href="#deep" class="headerlink" title="deep"></a>deep</h3><p>当需要监听一个对象的改变时，普通的watch方法无法监听到对象内部属性的改变，只有data中的数据才能够监听到变化，此时就需要deep属性对对象进行深度监听。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"cityName.name"</span>/&gt;</span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#root'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    cityName: &#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">'shanghai'</span>&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    cityName: &#123;</span><br><span class="line">      handler(newName, oldName) &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;,</span><br><span class="line">    deep: <span class="literal">true</span>,</span><br><span class="line">    immediate: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>设置deep: true 则可以监听到cityName.name的变化，此时会给cityName的所有属性都加上这个监听器，当对象属性较多时，每个属性值的变化都会执行handler。如果只需要监听对象中的一个属性值，则可以做以下优化：使用字符串的形式监听对象属性：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  watch: &#123;</span><br><span class="line">    <span class="string">'cityName.name'</span>: &#123;</span><br><span class="line">      handler(newName, oldName) &#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      &#125;,</span><br><span class="line">      deep: <span class="literal">true</span>,</span><br><span class="line">      immediate: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>这样只会给对象的某个特定的属性加监听器。</p><p>数组（一维、多维）的变化不需要通过深度监听，对象数组中对象的属性变化则需要deep深度监听。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> tech-notes </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Vue </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       

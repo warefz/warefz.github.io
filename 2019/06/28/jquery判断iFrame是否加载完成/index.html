@@ -29,11 +29,11 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>产品学习 - 记</title>
+<title>jquery判断iframe是否加载完成 - 记</title>
 
 <meta name="keywords" content>
 
-<meta name="description " content="交互系统设计的目标可以从“可用性”和”用户体验“两个层面上进行分析，关注以人为本的用户需求">
+<meta name="description " content="介绍jquery里可以用来判断iframe框架里的页面是否加载完成的三种方法">
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -139,39 +139,23 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a href="https://warefz.github.io" target="_blank">ware_fz</a>
-                    <span title="最后编辑于&nbsp;2019-06-12">2019-06-12</span>
+                    <span title="最后编辑于&nbsp;2019-06-28">2019-06-28</span>
                 </p>
                 <p>自由</p>
             </div>
-            <h2 class="post-title">产品学习</h2>
+            <h2 class="post-title">jquery判断iFrame是否加载完成</h2>
             <div class="post-meta">
-                本文共计168个字 |
+                本文共计1150个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <h3 id="交互学习"><a href="#交互学习" class="headerlink" title="交互学习"></a>交互学习</h3><ul>
-<li><a href="http://www.woshipm.com/ucd/1489258.html" target="_blank" rel="noopener">人机交互指南</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/35184751" target="_blank" rel="noopener">人机交互指南2018中文版</a></li>
-<li><a href="https://uiiiuiii.com/screen/ios.htm" target="_blank" rel="noopener">Ios设计规范</a></li>
-</ul>
-<h3 id="常用交互软件"><a href="#常用交互软件" class="headerlink" title="常用交互软件"></a>常用交互软件</h3><ul>
-<li>Axure</li>
-<li><a href="https://creative.adobe.com/zh-cn/products/download/xd" target="_blank" rel="noopener">XD</a></li>
-<li>Sketch用于小图标</li>
-<li>Xmind或Mindmanager</li>
-</ul>
-<h3 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h3><ul>
-<li>《触动人心》</li>
-<li>《启示录》</li>
-<li>《点石成金》</li>
-<li>《写给大家看的设计书》</li>
-<li>《交互设计之路》</li>
-<li>《情感化设计》</li>
-<li>《可用性工程》</li>
-<li>《简约至上：交互式设计四策略》</li>
-<li>《设计中的设计》</li>
-</ul>
+            <p>假设我们的网页里有这样一个iframe框架：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"IFrame"</span> <span class="attr">src</span>=<span class="string">"about:blank"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在我们动态的给上面这个iframe框架指定了src地址后，我们可以用下面这三种方法来判断页面是否加载完成：</p>
+<h2 id="用jquery里的load来判断："><a href="#用jquery里的load来判断：" class="headerlink" title="用jquery里的load来判断："></a>用jquery里的load来判断：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $iFrame=$(<span class="string">"#IFrame"</span>);      </span><br><span class="line">$iFrame.prop(<span class="string">"src"</span>,<span class="string">"http://www.aijquery.cn"</span>);    </span><br><span class="line">$iFrame.load(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;       </span><br><span class="line">    alert(<span class="string">"加载完毕"</span>);    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="使用onreadystatechange来判断："><a href="#使用onreadystatechange来判断：" class="headerlink" title="使用onreadystatechange来判断："></a>使用onreadystatechange来判断：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $iFrame=$(<span class="string">"#IFrame"</span>);</span><br><span class="line">$iFrame.prop(<span class="string">"src"</span>,<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="comment">/*@aijquery@*/</span><span class="number">0</span>) &#123; <span class="comment">//如果不是IE，IE的条件注释  </span></span><br><span class="line">    $iFrame[<span class="number">0</span>].onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;     </span><br><span class="line">        alert(<span class="string">"加载完毕"</span>); </span><br><span class="line">    &#125;;  </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">    $iFrame[<span class="number">0</span>].onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// IE下的节点都有onreadystatechange这个事件  </span></span><br><span class="line">        <span class="keyword">if</span> (iframe.readyState == <span class="string">"complete"</span>)&#123;  </span><br><span class="line">            alert(<span class="string">"加载完毕"</span>); </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="用attachEvent来判断："><a href="#用attachEvent来判断：" class="headerlink" title="用attachEvent来判断："></a>用attachEvent来判断：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $iFrame=$(<span class="string">"#IFrame"</span>);</span><br><span class="line">$iFrame.prop(<span class="string">"src"</span>,<span class="string">"http://www.360.cn"</span>);</span><br><span class="line"><span class="keyword">if</span> ($iFrame[<span class="number">0</span>].attachEvent)&#123;  </span><br><span class="line">      $iFrame[<span class="number">0</span>].attachEvent(<span class="string">"onload"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// IE  </span></span><br><span class="line">          alert(<span class="string">"加载完毕"</span>); </span><br><span class="line">      &#125;);  </span><br><span class="line">&#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">      $iFrame[<span class="number">0</span>].onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 非IE  </span></span><br><span class="line">          alert(<span class="string">"加载完毕"</span>);  </span><br><span class="line">      &#125;;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转载自  <a href="http://www.aijquery.cn/Html/jqueryjiqiao/110.html" target="_blank" rel="noopener">jquery里判断iFrame框架是否加载完成的三种方法</a></p>
 
         </div>
         <div class="post-tool">
@@ -182,24 +166,20 @@
         
         <div class="post-tags">标签：
             
-            <a href="/tags/interactive/">交互</a>
+            <a href="/tags/jquery/">jQuery</a>
+            
+            <a href="/tags/HTML/">HTML</a>
             
         </div>
         
         <div class="post-nav">
             
-            <div class="post-nav-next post-nav-item">
-                <a href="/2019/06/12/初级后端工程师进阶/" rel="next" title="初级后端工程师进阶">
-                    <i class="fa fa-chevron-left"></i> 初级后端工程师进阶
-                </a>
-            </div>
-            
             <span class="post-nav-divider"></span>
             
             
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/06/12/vue好用的插件/" rel="prev" title="一些好用的插件">
-                    一些好用的插件 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/06/27/jquery的on方法和off方法/" rel="prev" title="jquery的on()方法和off()方法">
+                    jquery的on()方法和off()方法 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
             
@@ -216,7 +196,7 @@
         <strong class="sidebar-title">
             目录
         </strong>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#交互学习"><span class="toc-text">交互学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用交互软件"><span class="toc-text">常用交互软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#书单"><span class="toc-text">书单</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用jquery里的load来判断："><span class="toc-text">用jquery里的load来判断：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用onreadystatechange来判断："><span class="toc-text">使用onreadystatechange来判断：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用attachEvent来判断："><span class="toc-text">用attachEvent来判断：</span></a></li></ol>
     </div>
 </aside>
     

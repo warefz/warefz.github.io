@@ -29,11 +29,11 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>qa - 帮助那个中心... - 记</title>
+<title>scrollintoview - 记</title>
 
 <meta name="keywords" content>
 
-<meta name="description " content="这里是网站的站内帮助，帮助中心会尽量把一些常见问题通过自问自答的方式放出，希望真的能帮到你们。">
+<meta name="description " content="使用scrollIntoView将元素定位到屏幕可视范围内，下面介绍一些与之相关的方法">
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -106,6 +106,21 @@
             <div class="page-title">
     <ul>
         <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
@@ -124,26 +139,37 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a href="https://warefz.github.io" target="_blank">ware_fz</a>
-                    <span title="最后编辑于&nbsp;2019-06-11">2019-06-11</span>
+                    <span title="最后编辑于&nbsp;2019-06-27">2019-06-27</span>
                 </p>
                 <p>自由</p>
             </div>
-            <h2 class="post-title">QA - 帮助那个中心...</h2>
+            <h2 class="post-title">scrollIntoView</h2>
             <div class="post-meta">
-                本文共计340个字 |
+                本文共计1149个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <h3 id="Q-这网站怎么弄的，还挺好看的啊？"><a href="#Q-这网站怎么弄的，还挺好看的啊？" class="headerlink" title="Q: 这网站怎么弄的，还挺好看的啊？"></a>Q: 这网站怎么弄的，还挺好看的啊？</h3><blockquote>
-<p>A: 本站是静态博客，通过<code>hexo</code>生成，主题使用了开源到<code>GitHub</code>的一个主题，本站底部有它们的链接</p>
+            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>DOM规范中并没有规定各浏览器需要实现怎样的滚动页面区域，各浏览器实现了相应的方法，可以使用不同的方式控制页面区域的滚动。这些方法作为HTMLElement类型的扩展存在，所以它能在所有元素上使用。</p>
+<h2 id="scrollIntoView"><a href="#scrollIntoView" class="headerlink" title="scrollIntoView()"></a>scrollIntoView()</h2><p>默认<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.scrollIntoView()  <span class="comment">//  滚动到可视范围顶端</span></span><br></pre></td></tr></table></figure></p>
+<p>boolean值<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">element.scrollIntoView(<span class="literal">true</span>)  <span class="comment">//  滚动到可视范围顶端</span></span><br><span class="line">element.scrollIntoView(<span class="literal">false</span>)  <span class="comment">//  滚动到可视范围底部</span></span><br></pre></td></tr></table></figure></p>
+<p>对象</p>
+<ul>
+<li>behavior 可选<br>定义缓动动画， “auto”, “instant”, 或 “smooth” 之一。默认为 “auto”。</li>
+<li>block 可选<br>“start”, “center”, “end”, 或 “nearest”之一。默认为 “start”。</li>
+<li>inline 可选<br>“start”, “center”, “end”, 或 “nearest”之一。默认为 “nearest”。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 动画运动到可视范围中间</span></span><br><span class="line">element.scrollIntoView(&#123;<span class="attr">behavior</span>: <span class="string">"smooth"</span>, <span class="attr">block</span>: <span class="string">"center"</span>, <span class="attr">inline</span>: <span class="string">"center"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><ul>
+<li>scrollIntoView(alignWithTop)：滚动浏览器窗口或容器元素，以便在当前视窗的可见范围看见当前元素。如果alignWithTop为true，或者省略它，窗口会尽可能滚动到自身顶部与元素顶部平齐。——-目前各浏览器均支持</li>
+<li>scrollIntoViewIfNeeded(alignCenter)：只在当前元素在视窗的可见范围内不可见的情况下，才滚动浏览器窗口或容器元素，最终让当前元素可见。如果当前元素在视窗中可见，这个方法不做任何处理。如果将可选参数alignCenter设置为true，则表示尽量将元素显示在视窗中部（垂直方向）——Safari、Chrome实现了这个方法</li>
+<li>scrollByLines(lineCount)：将元素的内容滚动指定的行数的高度，lineCount的值可以为正值或是负值。—Safari、Chrome实现了这个方法</li>
+<li>scrollByPages(pageCount)：将元素的内容滚动指定的页面的高度，具体高度由元素的高度决定。—Safari、Chrome实现了这个方法</li>
+</ul>
+<blockquote>
+<p>scrollIntoView()和scrollIntoVIewIfNeeded()作用的是元素的窗口，而scrollByLines()、scrollByPages()影响元素自身</p>
 </blockquote>
-<h3 id="Q-我也想用这个主题搭个博客，不知道怎么弄？"><a href="#Q-我也想用这个主题搭个博客，不知道怎么弄？" class="headerlink" title="Q: 我也想用这个主题搭个博客，不知道怎么弄？"></a>Q: 我也想用这个主题搭个博客，不知道怎么弄？</h3><blockquote>
-<p>A: 先去<code>hexo</code>官网看看，学会用这个写作并学会使用<code>gitpages</code>之类的部署博客。教程谷歌一下遍地皆是。主题是免费的，在本站底部可找到链接，根据文档自及配置就好了。需要注意的是主题有全站<code>https</code>开关，在主题<code>_config.yml</code>文件的<code>fullHttps</code>处配置。如配置不当某些文件就无法正确引用，加载出来的页面会很挫。 </p>
-</blockquote>
-<h3 id="Q-你这主题，我配置了怎么运行报错啊，跑不起来啊？"><a href="#Q-你这主题，我配置了怎么运行报错啊，跑不起来啊？" class="headerlink" title="Q: 你这主题，我配置了怎么运行报错啊，跑不起来啊？"></a>Q: 你这主题，我配置了怎么运行报错啊，跑不起来啊？</h3><blockquote>
-<p>A: 关于使用主题出错，请先前往<a href="https://github.com/tangkunyin/hexo-theme-jsimple/issues" target="_blank" rel="noopener">JSimple-issues</a>寻找答案，说不定你遇到的问题，已经有人碰到了。</p>
-</blockquote>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>由于这个属性还没有成为通用标准，所以使用前需要注意兼容性。</p>
 
         </div>
         <div class="post-tool">
@@ -152,16 +178,45 @@
             </a>
         </div>
         
+        <div class="post-tags">标签：
+            
+            <a href="/tags/front-end/">前端</a>
+            
+        </div>
+        
         <div class="post-nav">
+            
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/06/27/jquery的on方法和off方法/" rel="next" title="jquery的on()方法和off()方法">
+                    <i class="fa fa-chevron-left"></i> jquery的on()方法和off()方法
+                </a>
+            </div>
             
             <span class="post-nav-divider"></span>
             
             
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/27/vue的一些知识点/" rel="prev" title="vue的一些知识点">
+                    vue的一些知识点 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
         </div>
     </article>
     
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
     
 
+    
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scrollIntoView"><span class="toc-text">scrollIntoView()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性"><span class="toc-text">兼容性</span></a></li></ol>
+    </div>
+</aside>
     
     
     
@@ -174,7 +229,7 @@
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: left">
+    <div class="footer-inner" style="text-align: center">
         <p>
             <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->

@@ -29,11 +29,11 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>qa - 帮助那个中心... - 记</title>
+<title>vue初始化过程 - 记</title>
 
 <meta name="keywords" content>
 
-<meta name="description " content="这里是网站的站内帮助，帮助中心会尽量把一些常见问题通过自问自答的方式放出，希望真的能帮到你们。">
+<meta name="description " content="介绍Vue实例beforeMount前的初始化内容">
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -106,6 +106,21 @@
             <div class="page-title">
     <ul>
         <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
@@ -124,26 +139,40 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a href="https://warefz.github.io" target="_blank">ware_fz</a>
-                    <span title="最后编辑于&nbsp;2019-06-11">2019-06-11</span>
+                    <span title="最后编辑于&nbsp;2019-06-18">2019-06-18</span>
                 </p>
                 <p>自由</p>
             </div>
-            <h2 class="post-title">QA - 帮助那个中心...</h2>
+            <h2 class="post-title">Vue初始化过程</h2>
             <div class="post-meta">
-                本文共计340个字 |
+                本文共计392个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <h3 id="Q-这网站怎么弄的，还挺好看的啊？"><a href="#Q-这网站怎么弄的，还挺好看的啊？" class="headerlink" title="Q: 这网站怎么弄的，还挺好看的啊？"></a>Q: 这网站怎么弄的，还挺好看的啊？</h3><blockquote>
-<p>A: 本站是静态博客，通过<code>hexo</code>生成，主题使用了开源到<code>GitHub</code>的一个主题，本站底部有它们的链接</p>
+            <blockquote>
+<p>本文主要介绍Vue实例beforeMount前的初始化内容</p>
 </blockquote>
-<h3 id="Q-我也想用这个主题搭个博客，不知道怎么弄？"><a href="#Q-我也想用这个主题搭个博客，不知道怎么弄？" class="headerlink" title="Q: 我也想用这个主题搭个博客，不知道怎么弄？"></a>Q: 我也想用这个主题搭个博客，不知道怎么弄？</h3><blockquote>
-<p>A: 先去<code>hexo</code>官网看看，学会用这个写作并学会使用<code>gitpages</code>之类的部署博客。教程谷歌一下遍地皆是。主题是免费的，在本站底部可找到链接，根据文档自及配置就好了。需要注意的是主题有全站<code>https</code>开关，在主题<code>_config.yml</code>文件的<code>fullHttps</code>处配置。如配置不当某些文件就无法正确引用，加载出来的页面会很挫。 </p>
-</blockquote>
-<h3 id="Q-你这主题，我配置了怎么运行报错啊，跑不起来啊？"><a href="#Q-你这主题，我配置了怎么运行报错啊，跑不起来啊？" class="headerlink" title="Q: 你这主题，我配置了怎么运行报错啊，跑不起来啊？"></a>Q: 你这主题，我配置了怎么运行报错啊，跑不起来啊？</h3><blockquote>
-<p>A: 关于使用主题出错，请先前往<a href="https://github.com/tangkunyin/hexo-theme-jsimple/issues" target="_blank" rel="noopener">JSimple-issues</a>寻找答案，说不定你遇到的问题，已经有人碰到了。</p>
-</blockquote>
+<h2 id="Vue生命周期图示"><a href="#Vue生命周期图示" class="headerlink" title="Vue生命周期图示"></a>Vue生命周期图示</h2><p><img src="/img/vueLifecycle.png" alt></p>
+<h2 id="init-Events-amp-Lifecycle"><a href="#init-Events-amp-Lifecycle" class="headerlink" title="init Events &amp; Lifecycle"></a>init Events &amp; Lifecycle</h2><ul>
+<li>进行vue生命周期变量的初始化，如:$parent、$root、$children、$ref等(initLifecycle)</li>
+<li>事件监听的初始化(initEvents)</li>
+<li>编译render初始化(initRender)</li>
+</ul>
+<h2 id="beforeCreate"><a href="#beforeCreate" class="headerlink" title="beforeCreate"></a>beforeCreate</h2><p>进行beforeCreate生命钩子回调</p>
+<h2 id="init-injections-amp-reactivity"><a href="#init-injections-amp-reactivity" class="headerlink" title="init injections &amp; reactivity"></a>init injections &amp; reactivity</h2><ul>
+<li>绑定inject(initInjections)</li>
+<li>state状态初始化(initState)<ul>
+<li>初始化props</li>
+<li>初始化方法methods</li>
+<li>初始化data</li>
+<li>初始化computed</li>
+<li>初始化watch</li>
+</ul>
+</li>
+<li>绑定provide(initProvide)</li>
+</ul>
+<h2 id="created"><a href="#created" class="headerlink" title="created"></a>created</h2><p>进行created生命钩子回调</p>
 
         </div>
         <div class="post-tool">
@@ -152,16 +181,45 @@
             </a>
         </div>
         
+        <div class="post-tags">标签：
+            
+            <a href="/tags/vue/">Vue</a>
+            
+        </div>
+        
         <div class="post-nav">
+            
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/06/19/echarts配置项/" rel="next" title="echarts部分基础配置项">
+                    <i class="fa fa-chevron-left"></i> echarts部分基础配置项
+                </a>
+            </div>
             
             <span class="post-nav-divider"></span>
             
             
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/18/Vue处理边界情况/" rel="prev" title="Vue处理边界情况">
+                    Vue处理边界情况 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
         </div>
     </article>
     
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
     
 
+    
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue生命周期图示"><span class="toc-text">Vue生命周期图示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#init-Events-amp-Lifecycle"><span class="toc-text">init Events &amp; Lifecycle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#beforeCreate"><span class="toc-text">beforeCreate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#init-injections-amp-reactivity"><span class="toc-text">init injections &amp; reactivity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#created"><span class="toc-text">created</span></a></li></ol>
+    </div>
+</aside>
     
     
     
@@ -174,7 +232,7 @@
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: left">
+    <div class="footer-inner" style="text-align: center">
         <p>
             <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->

@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--[if lte IE 9]>
+<meta http-equiv="refresh" content="0;url=https://warefz.github.io/warn.html">
+<![endif]-->
+<meta charset="utf-8">
+<meta http-equiv="X-DNS-Prefetch-Control" content="on">
+<link rel="dns-prefetch" href="https://warefz.github.io">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="prefetch" href="https://warefz.github.io">
+<link rel="prefetch" href="//www.google-analytics.com">
+
+    <link rel="dns-prefetch" href="//disqus.com">
+    <link rel="dns-prefetch" href="//warefz.disqus.com">
+    <link rel="prefetch" href="//disqus.com">
+    <link rel="prefetch" href="//warefz.disqus.com">
+
+
+<link rel="prerender" href="https://warefz.github.io">
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://warefz.github.io">
+<meta name="author" content="ware_fz">
+<link rel="stylesheet" href="/css/JSimple.css">
+
+<link rel="shortcut icon" href="/images/favicon.png">
+
+
+<title>jquery的on()方法和off()方法 - 记</title>
+
+<meta name="keywords" content>
+
+<meta name="description " content>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                processEscapes: true
+            }
+        });
+    </script>
+
+
+    
+
+    
+
+</head>
+<body>
+<div id="nav">
+    <nav class="nav-menu">
+        <a class="site-name current" href="/" title="说">说</a>
+        <a class="site-index current" href="/"><i class="fa fa-home"></i><span>首页</span></a>
+        <a href="/archives" title="归档"><i class="fa fa-archives"></i><span>归档</span></a>
+        <a href="/tags" title="标签"><i class="fa fa-tags"></i><span>标签</span></a>
+        <!-- custom single page of menus -->
+        
+        
+        <a href="/help" title="帮助">
+            <i class="fa fa-question-circle"></i>
+            <span>帮助</span>
+        </a>
+        
+    </nav>
+</div>
+
+<div class="nav-user">
+    <a class="btn-search" href="#"><i class="fa fa-search"></i></a>
+    <a class="btn-read-mode" href="#"><i class="fa fa-sun-o"></i></a>
+    <a class="btn-sns-qr" href="javascript:"><i class="fa fa-weixin"></i></a>
+</div>
+
+<div id="wrapper" class="clearfix">
+    <div id="body">
+        <div class="main" id="main">
+            <div id="cover">
+    <div class="cover-img"></div>
+    <div class="cover-info">
+        
+        <h1 class="cover-siteName">ware_fz</h1>
+        <h3 class="cover-siteTitle">用文字记录生活</h3>
+        <p class="cover-siteDesc">一个关注技术与人文的IT博客</p>
+        <div class="cover-sns">
+            
+    &nbsp;&nbsp;<div class="btn btn-twitter">
+        <a href target="_blank" title="twitter" ref="friend">
+            <i class="fa fa-twitter"></i>
+        </a>
+    </div>
+
+    &nbsp;&nbsp;<div class="btn btn-github">
+        <a href="https://github.com/warefz" target="_blank" title="github" ref="friend">
+            <i class="fa fa-github"></i>
+        </a>
+    </div>
+
+
+        </div>
+    </div>
+</div>
+
+            <div class="page-title">
+    <ul>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
+        <li class="page-search">
+    <form id="search" class="search-form">
+        <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
+        <button type="button" disabled="disabled" class="search-form-submit"><i class="fa fa-search"></i></button>
+    </form>
+</li>
+
+    </ul>
+</div>
+<div class="main-inner">
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-06-27">2019-06-27</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">jquery的on()方法和off()方法</h2>
+            <div class="post-meta">
+                本文共计4264个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <blockquote>
+<p>自从jquery1.7以来，on事件添加到这个版本，使得事件的绑定变的十分简单，用过jquery的人相信对off，on方法爱不释手。下面是相关的on,off的使用语法:</p>
+</blockquote>
+<h2 id="on-使用场景"><a href="#on-使用场景" class="headerlink" title="on() 使用场景"></a>on() 使用场景</h2><h3 id="最简单的写法"><a href="#最简单的写法" class="headerlink" title="最简单的写法"></a>最简单的写法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"ul li"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">  alert(<span class="string">"点击事件!"</span>);  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="多个元素绑定相同事件"><a href="#多个元素绑定相同事件" class="headerlink" title="多个元素绑定相同事件"></a>多个元素绑定相同事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"ul li,div"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">  alert(<span class="string">"点击事件!"</span>);  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="元素绑定多个事件"><a href="#元素绑定多个事件" class="headerlink" title="元素绑定多个事件"></a>元素绑定多个事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".demonstrate"</span>).on(&#123;  </span><br><span class="line">  mouseover:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">    $(<span class="keyword">this</span>).addClass(<span class="string">"over"</span>);  </span><br><span class="line">  &#125;,  </span><br><span class="line">  mouseout:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">    $(<span class="keyword">this</span>).removeClass(<span class="string">"over"</span>);  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;,<span class="string">"ul li"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="实现事件委托"><a href="#实现事件委托" class="headerlink" title="实现事件委托"></a>实现事件委托</h3><p>父元素ul li 给目标元素.demostrate添加事件,事件委托的好处是,目标元素可以是之前页面不存在到,后来加上去的也可以。<br>只需要考虑一个父元素就可以，给父元素添加委托事件，不用考虑子元素的数量什么的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"ul li"</span>).on(&#123;</span><br><span class="line">  click:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'click'</span>,<span class="string">'1111'</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  mouseover: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'mouseover'</span>,<span class="string">'1111'</span>);</span><br><span class="line">    $(<span class="keyword">this</span>).addClass(<span class="string">"over"</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  mouseout: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="keyword">this</span>).removeClass(<span class="string">"over"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,<span class="string">".demostrate"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="具体用法"><a href="#具体用法" class="headerlink" title="具体用法"></a>具体用法</h3><p>用法一</p>
+<p>jQueryObject.on( events [, selector ] [, data ], handler )</p>
+<p>用法二</p>
+<p>jQueryObject.on( eventsMap [, selector ] [, data ] )</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul>
+<li>events    String类型一个或多个用空格分隔的事件类型和可选的命名空间，例如”click”、”focus click”、”keydown.myPlugin”。</li>
+<li>eventsMap    Object类型一个Object对象，其每个属性对应事件类型和可选的命名空间(参数events)，属性值对应绑定的事件处理函数(参数handler)。</li>
+<li>selector    可选/String类型一个jQuery选择器，用于指定哪些后代元素可以触发绑定的事件。如果该参数为null或被省略，则表示当前元素自身绑定事件(实际触发者也可能是后代元素，只要事件流能到达当前元素即可)。</li>
+<li>data    可选/任意类型触发事件时，需要通过event.data传递给事件处理函数的任意数据。</li>
+<li>handler    Function类型指定的事件处理函数。</li>
+</ul>
+<p>关于参数selector，你可以简单地理解为：如果该参数等于null或被省略，则为当前匹配元素绑定事件；否则就是为当前匹配元素的后代元素中符合selector选择器的元素绑定事件。</p>
+<p>参数handler中的this指向当前匹配元素的后代元素中触发该事件的DOM元素。如果参数selector等于null或被省略，则this指向当前匹配元素(也就是该元素)。</p>
+<p>on()还会为handler传入一个参数：表示当前事件的Event对象。</p>
+<p>参数handler的返回值与DOM原生事件的处理函数返回值作用一致。例如”submit”(表单提交)事件的事件处理函数返回false，可以阻止表单的提交。</p>
+<p>如果事件处理函数handler仅仅只为返回false值，可以直接将handler设为false。</p>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>on()函数的返回值为jQuery类型，返回当前jQuery对象本身。</p>
+<h4 id="重要说明"><a href="#重要说明" class="headerlink" title="重要说明"></a>重要说明</h4><p>on()函数并不是为当前jQuery对象匹配的元素绑定事件处理函数，而是为它们的后代元素中符合选择器selector参数的元素绑定事件处理函数。on()函数并不是直接为这些后代元素挨个绑定事件，而是委托给当前jQuery对象的匹配元素来处理。由于DOM 2级的事件流机制，当后代元素selector触发事件时，该事件会在事件冒泡中传递给其所有的祖辈元素，当事件流传递到当前匹配元素时，jQuery会判断是哪个后代元素触发了事件，如果该元素符合选择器selector，jQuery就会捕获该事件，从而执行绑定的事件处理函数。</p>
+<h2 id="off-解绑事件"><a href="#off-解绑事件" class="headerlink" title="off() 解绑事件"></a>off() 解绑事件</h2><h3 id="最简单的写法-1"><a href="#最简单的写法-1" class="headerlink" title="最简单的写法"></a>最简单的写法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"ul li"</span>).off(<span class="string">"click"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="多个元素解绑相同事件"><a href="#多个元素解绑相同事件" class="headerlink" title="多个元素解绑相同事件"></a>多个元素解绑相同事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"ul li,div"</span>).off(<span class="string">"click"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="元素解绑多个事件"><a href="#元素解绑多个事件" class="headerlink" title="元素解绑多个事件"></a>元素解绑多个事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">".demonstrate"</span>).off(<span class="string">"mouseover mouseout"</span>,<span class="string">"ul li"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="实现事件委托的解绑"><a href="#实现事件委托的解绑" class="headerlink" title="实现事件委托的解绑"></a>实现事件委托的解绑</h3><p>父元素ul li 给目标元素.demostrate移除事件,事件委托的好处是,目标元素可以是之前页面不存在到,后来加上去的也可以。<br>只需要考虑一个父元素就可以，给父元素移除委托事件，不用考虑子元素的数量什么的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"ul li"</span>).off(<span class="string">"click mouseover mouseout"</span>,<span class="string">".demostrate"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="具体用法-1"><a href="#具体用法-1" class="headerlink" title="具体用法"></a>具体用法</h3><p>用法一</p>
+<p>jQueryObject.off( [ events [, selector ] [, handler ] ] )</p>
+<p>用法二</p>
+<p>jQueryObject.off( eventsMap [, selector ] )</p>
+<h4 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h4><ul>
+<li>events    可选/String类型一个或多个用空格分隔的事件类型和可选的命名空间，例如”click”、”focus click”、”keydown.myPlugin”。</li>
+<li>eventsMap    Object类型一个Object对象，其每个属性对应事件类型和可选的命名空间(参数events)，属性值对应绑定的事件处理函数(参数handler)。</li>
+<li>selector    可选/String类型一个jQuery选择器，用于指定哪些后代元素可以触发绑定的事件。如果该参数为null或被省略，则表示当前元素自身绑定事件(实际触发者也可能是后代元素，只要事件流能到达当前元素即可)。</li>
+<li>handler    可选/Function类型指定的事件处理函数。<br>off()函数将会移除当前匹配元素上为后代元素selector绑定的events事件的事件处理函数handler。</li>
+</ul>
+<p>如果省略参数selector，则移除为任何元素绑定的事件处理函数。</p>
+<p>参数selector必须与通过on()函数添加绑定时传入的选择器一致。</p>
+<p>如果省略参数handler，则移除指定元素指定事件类型上绑定的所有事件处理函数。</p>
+<p>如果省略了所有参数，则表示移除当前元素上为任何元素绑定的任何事件类型的任何事件处理函数。</p>
+<h4 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h4><p>off()函数的返回值为jQuery类型，返回当前jQuery对象本身。</p>
+<p>实际上，off()函数的参数全是筛选条件，只有匹配所有参数条件的事件处理函数才会被移除。参数越多，限定条件就越多，被移除的范围就越小。</p>
+<h2 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">btnClick1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert( <span class="keyword">this</span>.value + <span class="string">"-1"</span> );</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">btnClick2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert( <span class="keyword">this</span>.value + <span class="string">"-2"</span> );</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> $body = $(<span class="string">"body"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 给按钮1绑定点击</span></span><br><span class="line">$body.on(<span class="string">"click"</span>, <span class="string">"#btn1"</span>, btnClick1 );</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 给按钮2绑定点击</span></span><br><span class="line">$body.on(<span class="string">"click"</span>, <span class="string">"#btn2"</span>, btnClick2 );</span><br><span class="line"> </span><br><span class="line"><span class="comment">//为所有a元素绑定click、mouseover、mouseleave事件</span></span><br><span class="line">$body.on(<span class="string">"click mouseover mouseleave"</span>, <span class="string">"a"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( event.type == <span class="string">"click"</span> )&#123;</span><br><span class="line">    $body.off(<span class="string">"click"</span>, <span class="string">"#btn1"</span>);<span class="comment">//取消btn1的绑定事件。成功执行</span></span><br><span class="line">    alert(<span class="string">"点击事件"</span>);</span><br><span class="line">    alert(<span class="string">"ddd"</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>( event.type == <span class="string">"mouseover"</span> )&#123;</span><br><span class="line">    $(<span class="keyword">this</span>).css(<span class="string">"color"</span>, <span class="string">"red"</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    $(<span class="keyword">this</span>).css(<span class="string">"color"</span>, <span class="string">"blue"</span>);</span><br><span class="line">     </span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 移除body元素为所有button元素的click事件绑定的事件处理函数btnClick2</span></span><br><span class="line"><span class="comment">// 点击按钮，btnClick1照样执行</span></span><br><span class="line">$body.off(<span class="string">"click"</span>, <span class="string">":button"</span>, btnClick2);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 点击按钮1，不会执行任何事件处理函数</span></span><br><span class="line">$body.off(<span class="string">"click"</span>, <span class="string">"#btn1"</span>);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 注意： $body.off("click", ":button"); 无法移除btn1的点击事件，off()函数指定的选择器必须与on()函数传入的选择器一致。</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 移除body元素为所有元素(包括button和&lt;a&gt;元素)的click事件绑定的所有处理函数</span></span><br><span class="line"><span class="comment">// 点击按钮或链接，都不会触发执行任何事件处理函数</span></span><br><span class="line">$(<span class="string">"body"</span>).off(<span class="string">"click"</span>);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">// 移除body元素为所有元素的任何事件绑定的所有处理函数</span></span><br><span class="line"><span class="comment">// 点击按钮，或点击链接或者鼠标移入/移出链接，都不会触发执行任何事件处理函数</span></span><br><span class="line">$(<span class="string">"body"</span>).off( );</span><br></pre></td></tr></table></figure>
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/jquery/">jQuery</a>
+            
+            <a href="/tags/js/">JavaScript</a>
+            
+        </div>
+        
+        <div class="post-nav">
+            
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/06/28/jquery判断iFrame是否加载完成/" rel="next" title="jquery判断iFrame是否加载完成">
+                    <i class="fa fa-chevron-left"></i> jquery判断iFrame是否加载完成
+                </a>
+            </div>
+            
+            <span class="post-nav-divider"></span>
+            
+            
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/27/scrollIntoView/" rel="prev" title="scrollIntoView">
+                    scrollIntoView <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
+        </div>
+    </article>
+    
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+
+    
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#on-使用场景"><span class="toc-text">on() 使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最简单的写法"><span class="toc-text">最简单的写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多个元素绑定相同事件"><span class="toc-text">多个元素绑定相同事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元素绑定多个事件"><span class="toc-text">元素绑定多个事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现事件委托"><span class="toc-text">实现事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体用法"><span class="toc-text">具体用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重要说明"><span class="toc-text">重要说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#off-解绑事件"><span class="toc-text">off() 解绑事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#最简单的写法-1"><span class="toc-text">最简单的写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多个元素解绑相同事件"><span class="toc-text">多个元素解绑相同事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元素解绑多个事件"><span class="toc-text">元素解绑多个事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现事件委托的解绑"><span class="toc-text">实现事件委托的解绑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体用法-1"><span class="toc-text">具体用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参数-1"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#返回值-1"><span class="toc-text">返回值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关代码"><span class="toc-text">相关代码</span></a></li></ol>
+    </div>
+</aside>
+    
+    
+    
+
+
+</div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
+        </div><!-- end #main-->
+    </div><!-- end #body -->
+    <footer class="footer">
+    <div class="footer-inner" style="text-align: center">
+        <p>
+            <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- 自定义链接 -->
+            <a href="/help" title="帮助">帮助</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <a href="/links" title="友链">友链</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
+            <!-- <a href="/sitemap.xml" title="地图">地图</a> -->
+        </p>
+        <p>
+            本站已建立&nbsp<span id="siteBuildingTime"></span>&nbsp天，<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="licence">采用知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议创作</a><br>
+            ©<span id="cpYear"></span> 基于&nbsp<a href="http://hexo.io" target="_blank" rel="nofollow">Hexo</a>
+            ，主题采用&nbsp&nbsp<a href="https://github.com/tangkunyin/hexo-theme-jsimple" target="_blank" rel="bookmark">JSimple</a>
+            ，作者&nbsp<a href="https://warefz.github.io" target="_blank" rel="friend">ware_fz</a>
+            ，Hosted by <a href="https://pages.github.com/" target="_blank" rel="nofollow">GitHub Pages</a>
+        </p>
+    </div>
+</footer>
+<script src="/js/SimpleCore.js"></script>
+
+</div>
+<!-- search pop -->
+<div class="popup search-popup local-search-popup">
+    <div class="local-search-header clearfix">
+        <span class="search-icon">
+            <i class="fa fa-search"></i>
+        </span>
+        <span class="popup-btn-close">
+            <i class="fa fa-times-circle"></i>
+        </span>
+        <div class="local-search-input-wrapper">
+            <input id="local-search-input" spellcheck="false" type="text" autocomplete="off" placeholder="请输入查询关键词">
+        </div>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+<div class="fixed-btn">
+    <a class="btn-gotop" href="javascript:"> <i class="fa fa-angle-up"></i></a>
+</div>
+<script>
+    $(function () {
+        var jsi_config = {
+            buildingTime: '2019/06/10',
+            current: $('.post-tags').length > 0 ? 'post' : 'archive',
+            donateImg: '/images/donate-qr.png',
+            snsQRCode: '/images/sns-qrcode.png',
+            localSearch: { dbPath: '' },
+            readMode: 'day'
+        };
+        
+            jsi_config.localSearch = {
+                dbPath: '/search.xml',
+                trigger: 'auto',
+                topN: '1',
+                unescape: 'false'
+            }
+        
+        SimpleCore.init(jsi_config);
+        
+    });
+</script>
+</body>
+</html>

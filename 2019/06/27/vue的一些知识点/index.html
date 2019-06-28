@@ -29,11 +29,11 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>qa - 帮助那个中心... - 记</title>
+<title>vue的一些知识点 - 记</title>
 
 <meta name="keywords" content>
 
-<meta name="description " content="这里是网站的站内帮助，帮助中心会尽量把一些常见问题通过自问自答的方式放出，希望真的能帮到你们。">
+<meta name="description " content="在开发过程中遇到的一些知识点，这里整理了一些关于这些知识点的内容">
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -106,6 +106,21 @@
             <div class="page-title">
     <ul>
         <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
@@ -124,26 +139,19 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a href="https://warefz.github.io" target="_blank">ware_fz</a>
-                    <span title="最后编辑于&nbsp;2019-06-11">2019-06-11</span>
+                    <span title="最后编辑于&nbsp;2019-06-27">2019-06-27</span>
                 </p>
                 <p>自由</p>
             </div>
-            <h2 class="post-title">QA - 帮助那个中心...</h2>
+            <h2 class="post-title">vue的一些知识点</h2>
             <div class="post-meta">
-                本文共计340个字 |
+                本文共计300个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <h3 id="Q-这网站怎么弄的，还挺好看的啊？"><a href="#Q-这网站怎么弄的，还挺好看的啊？" class="headerlink" title="Q: 这网站怎么弄的，还挺好看的啊？"></a>Q: 这网站怎么弄的，还挺好看的啊？</h3><blockquote>
-<p>A: 本站是静态博客，通过<code>hexo</code>生成，主题使用了开源到<code>GitHub</code>的一个主题，本站底部有它们的链接</p>
-</blockquote>
-<h3 id="Q-我也想用这个主题搭个博客，不知道怎么弄？"><a href="#Q-我也想用这个主题搭个博客，不知道怎么弄？" class="headerlink" title="Q: 我也想用这个主题搭个博客，不知道怎么弄？"></a>Q: 我也想用这个主题搭个博客，不知道怎么弄？</h3><blockquote>
-<p>A: 先去<code>hexo</code>官网看看，学会用这个写作并学会使用<code>gitpages</code>之类的部署博客。教程谷歌一下遍地皆是。主题是免费的，在本站底部可找到链接，根据文档自及配置就好了。需要注意的是主题有全站<code>https</code>开关，在主题<code>_config.yml</code>文件的<code>fullHttps</code>处配置。如配置不当某些文件就无法正确引用，加载出来的页面会很挫。 </p>
-</blockquote>
-<h3 id="Q-你这主题，我配置了怎么运行报错啊，跑不起来啊？"><a href="#Q-你这主题，我配置了怎么运行报错啊，跑不起来啊？" class="headerlink" title="Q: 你这主题，我配置了怎么运行报错啊，跑不起来啊？"></a>Q: 你这主题，我配置了怎么运行报错啊，跑不起来啊？</h3><blockquote>
-<p>A: 关于使用主题出错，请先前往<a href="https://github.com/tangkunyin/hexo-theme-jsimple/issues" target="_blank" rel="noopener">JSimple-issues</a>寻找答案，说不定你遇到的问题，已经有人碰到了。</p>
-</blockquote>
+            <h2 id="vue-config-productiontip-false"><a href="#vue-config-productiontip-false" class="headerlink" title="vue.config.productiontip = false"></a>vue.config.productiontip = false</h2><p>类型： boolean<br>默认值： true<br>用法：<br>设置为 false 以阻止 vue 在启动时生成生产提示。</p>
+<h2 id="jquery-animate"><a href="#jquery-animate" class="headerlink" title="jquery animate"></a>jquery animate</h2><p>(selector).animate({styles},speed,easing,callback)<br>animate() 方法执行 CSS 属性集的自定义动画。<br>该方法通过 CSS 样式将元素从一个状态改变为另一个状态。CSS属性值是逐渐改变的，这样就可以创建动画效果。<br>只有数字值可创建动画（比如 “margin:30px”）。字符串值无法创建动画（比如 “background-color:red”）。</p>
 
         </div>
         <div class="post-tool">
@@ -152,16 +160,45 @@
             </a>
         </div>
         
+        <div class="post-tags">标签：
+            
+            <a href="/tags/vue/">Vue</a>
+            
+        </div>
+        
         <div class="post-nav">
+            
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/06/27/scrollIntoView/" rel="next" title="scrollIntoView">
+                    <i class="fa fa-chevron-left"></i> scrollIntoView
+                </a>
+            </div>
             
             <span class="post-nav-divider"></span>
             
             
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/19/echarts配置项/" rel="prev" title="echarts部分基础配置项">
+                    echarts部分基础配置项 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
         </div>
     </article>
     
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
     
 
+    
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-config-productiontip-false"><span class="toc-text">vue.config.productiontip = false</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jquery-animate"><span class="toc-text">jquery animate</span></a></li></ol>
+    </div>
+</aside>
     
     
     
@@ -174,7 +211,7 @@
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: left">
+    <div class="footer-inner" style="text-align: center">
         <p>
             <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->

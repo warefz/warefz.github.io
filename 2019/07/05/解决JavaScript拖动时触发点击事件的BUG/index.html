@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>标签云 - 记</title>
+<title>解决javascript拖动时触发点击事件的bug - 记</title>
 
 <meta name="keywords" content>
 
@@ -105,8 +105,22 @@
 
             <div class="page-title">
     <ul>
-        <li><a href="/" data-name="首页" title="Back Home">首页</a></li>
-        <li><a href="/archives" data-name="归档" title="归档">归档</a></li>
+        <li><a href="/">最近</a></li>
+        
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <input type="text" readonly="readonly" id="local-search-input-tip" placeholder="读物检索~">
@@ -119,45 +133,96 @@
 <div class="main-inner">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="post-header">
-            <h3 class="post-title">总的来说，本站目前涉及11个领域</h3>
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-07-05">2019-07-05</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">解决JavaScript拖动时触发点击事件的BUG</h2>
+            <div class="post-meta">
+                本文共计509个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
         </div>
-        <p class="tag-img"><img src="/images/tags-bg.png" alt="tags-bg"></p>
-        <div class="post-content markdown-body" itemprop="articleBody">
-            <ul class="tag-list">
-                
-                <li><a href="/tags/CSS/">CSS(1)</a></li>
-                
-                <li><a href="/tags/echarts/">Echarts(1)</a></li>
-                
-                <li><a href="/tags/HTML/">HTML(1)</a></li>
-                
-                <li><a href="/tags/js/">JavaScript(3)</a></li>
-                
-                <li><a href="/tags/vue/">Vue(9)</a></li>
-                
-                <li><a href="/tags/webpack/">WebPack(1)</a></li>
-                
-                <li><a href="/tags/jquery/">jQuery(2)</a></li>
-                
-                <li><a href="/tags/interactive/">交互(1)</a></li>
-                
-                <li><a href="/tags/front-end/">前端(10)</a></li>
-                
-                <li><a href="/tags/back-end/">后端(1)</a></li>
-                
-                <li><a href="/tags/reading/">读书(2)</a></li>
-                
-            </ul>
+        <div class="post-content markdown-body">
+            <h2 id="bug的原因"><a href="#bug的原因" class="headerlink" title="bug的原因"></a>bug的原因</h2><p>一个完整的click事件是包含</p>
+<blockquote>
+<p>mousedown,mouseup</p>
+</blockquote>
+<p>两个事件的，而拖拽一个元素时，包含下面三个事件：</p>
+<blockquote>
+<p>mousedown,mousemove,mouseup</p>
+</blockquote>
+<p>所以我们在拖拽一个元素结束后，如果此元素上面绑定了点击事件，就会同时触发元素的点击事件，用户体验度不好。</p>
+<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p> 仔细比较拖拽与点击事件，发现拖拽事件多了一个mousemove，我们可以从这个mousemove入手，点击事件时mousedown与mouseup触发时鼠标没有移动，而拖拽时鼠标移动了一定的距离，具体体现在px上。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>可以设定一个clickFlag变量，通过clickFlag来确定mousedown与mouseup到底是触发了点击事件还是拖动事件：</p>
+<ul>
+<li>mousedown时记录下鼠标的位置x1，y1</li>
+<li>mouseup时记录下鼠标的位置x2，y2</li>
+<li><p>判断两次位置是否一样或是相差小于一个定值（设为5px）:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = <span class="built_in">Math</span>.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2))</span><br></pre></td></tr></table></figure>
+<p>当d=0或是小于5时，即可认定用户没有拖拽。此时clickFlag为true，可以触发点击事件。</p>
+</li>
+</ul>
+
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">标签：
+            
+            <a href="/tags/js/">JavaScript</a>
+            
+        </div>
+        
+        <div class="post-nav">
+            
+            <span class="post-nav-divider"></span>
+            
+            
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/06/28/JS数组reduce方法/" rel="prev" title="JS数组reduce()方法">
+                    JS数组reduce()方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
         </div>
     </article>
     
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
+    
+    
+
+    
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bug的原因"><span class="toc-text">bug的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决思路"><span class="toc-text">解决思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法"><span class="toc-text">解决办法</span></a></li></ol>
+    </div>
+</aside>
+    
+    
+    
+
 
 </div>
+<script src="/js/busuanzi.pure.mini.js"></script>
+
 
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: left">
+    <div class="footer-inner" style="text-align: center">
         <p>
             <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->

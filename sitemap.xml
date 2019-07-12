@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://warefz.github.io/2019/07/05/%E8%A7%A3%E5%86%B3JavaScript%E6%8B%96%E5%8A%A8%E6%97%B6%E8%A7%A6%E5%8F%91%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E7%9A%84BUG/</loc>
+    
+    <lastmod>2019-07-05T03:17:33.961Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://warefz.github.io/2019/06/28/JS%E6%95%B0%E7%BB%84reduce%E6%96%B9%E6%B3%95/</loc>
+    
+    <lastmod>2019-06-28T07:09:35.901Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://warefz.github.io/2019/06/11/test/</loc>
+    
+    <lastmod>2019-06-28T05:13:51.069Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://warefz.github.io/2019/06/27/jquery%E7%9A%84on%E6%96%B9%E6%B3%95%E5%92%8Coff%E6%96%B9%E6%B3%95/</loc>
     
     <lastmod>2019-06-28T02:09:17.331Z</lastmod>
@@ -159,13 +180,6 @@
     <loc>https://warefz.github.io/about/index.html</loc>
     
     <lastmod>2019-06-12T09:11:29.683Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://warefz.github.io/2019/06/11/test/</loc>
-    
-    <lastmod>2019-06-12T01:38:19.045Z</lastmod>
     
   </url>
   

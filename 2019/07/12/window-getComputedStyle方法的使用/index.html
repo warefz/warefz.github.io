@@ -29,11 +29,11 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>解决javascript拖动时触发点击事件的bug - 记</title>
+<title>window.getcomputedstyle方法的使用 - 记</title>
 
 <meta name="keywords" content>
 
-<meta name="description " content>
+<meta name="description " content="Window.getComputedStyle()方法返回一个对象，该对象在应用活动样式表并解析这些值可能包含的任何基本计算后报告元素的所有CSS属性的值。 私有的CSS属性值可以通过对象提供的API或通过简单地使用CSS属性名称进行索引来访问。">
 
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -139,36 +139,32 @@
                 </a>
                 <p><span class="label">作者</span>
                     <a href="https://warefz.github.io" target="_blank">ware_fz</a>
-                    <span title="最后编辑于&nbsp;2019-07-05">2019-07-05</span>
+                    <span title="最后编辑于&nbsp;2019-07-12">2019-07-12</span>
                 </p>
                 <p>自由</p>
             </div>
-            <h2 class="post-title">解决JavaScript拖动时触发点击事件的BUG</h2>
+            <h2 class="post-title">window.getComputedStyle方法的使用</h2>
             <div class="post-meta">
-                本文共计509个字 |
+                本文共计1933个字 |
                 您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            <h2 id="bug的原因"><a href="#bug的原因" class="headerlink" title="bug的原因"></a>bug的原因</h2><p>一个完整的click事件是包含</p>
-<blockquote>
-<p>mousedown,mouseup</p>
-</blockquote>
-<p>两个事件的，而拖拽一个元素时，包含下面三个事件：</p>
-<blockquote>
-<p>mousedown,mousemove,mouseup</p>
-</blockquote>
-<p>所以我们在拖拽一个元素结束后，如果此元素上面绑定了点击事件，就会同时触发元素的点击事件，用户体验度不好。</p>
-<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p> 仔细比较拖拽与点击事件，发现拖拽事件多了一个mousemove，我们可以从这个mousemove入手，点击事件时mousedown与mouseup触发时鼠标没有移动，而拖拽时鼠标移动了一定的距离，具体体现在px上。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>可以设定一个clickFlag变量，通过clickFlag来确定mousedown与mouseup到底是触发了点击事件还是拖动事件：</p>
+            <h2 id="getComputedStyle-用法"><a href="#getComputedStyle-用法" class="headerlink" title="getComputedStyle() 用法"></a>getComputedStyle() 用法</h2><p>document.defaultView.getComputedStyle(element[,pseudo-element]);<br>或者<br>window.getComputedStyle(element[,pseudo-element]);</p>
+<p>首先是有两个参数，元素和伪类。第二个参数不是必须的，当不查询伪类元素的时候可以忽略或者传入 null。<br>使用示例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> my_div = <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>);</span><br><span class="line"><span class="keyword">let</span> style = <span class="built_in">window</span>.getComputedStyle(my_div, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p>关于 defaultView 引用一下 MDN 对于 defaultView 的描述:</p>
+<h3 id="defaultView"><a href="#defaultView" class="headerlink" title="defaultView"></a>defaultView</h3><p>在许多在线的演示代码中，getComputedStyle 是通过 document.defaultView 对象来调用的。<br>大部分情况下，这是不需要的，因为可以直接通过 window 对象调用。但有一种情况，你必需要使用 defaultView，那是在 Firefox 3.6 上访问子框架内的样式 (iframe)。</p>
+<p>而且除了在 IE8 浏览器中 document.defaultView === window 返回的是 false 外，其他的浏览器（包括 IE9 ）返回的都是 true。所以后面直接使用 window 就好，不用在输入那么长的代码了。</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>getComputedStyle 返回的对象是 CSSStyleDeclaration 类型的对象。取数据的时候可以直接按照属性的取法去取数据，例如 style.backgroundColor。需要注意的是，返回的对象的键名是 css 的驼峰式写法，background-color -&gt; backgroundColor。</p>
+<p>需要注意的是 float 属性，根据 《JavaScript 高级程序》所描述的情况 ，float 是 JS 的保留关键字。根据 DOM2 级的规范，取元素的 float 的时候应该使用 cssFloat。其实 chrome 和 Firefox 是支持 float 属性的，也就是说可以直接使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> float_property = <span class="built_in">window</span>.getComputedStyle.style; <span class="comment">// chrome 和 Firefox支持</span></span><br></pre></td></tr></table></figure></p>
+<p>而在任何版本的 IE 中都不能这样使用，并且在 IE 8 中仅支持 styleFloat ，这个下面的兼容性问题中谈到。</p>
+<h2 id="和-style-的异同"><a href="#和-style-的异同" class="headerlink" title="和 style 的异同"></a>和 style 的异同</h2><p>getComputedStyle 和 element.style 的相同点就是二者返回的都是 CSSStyleDeclaration 对象，取相应属性值得时候都是采用的 CSS 驼峰式写法，均需要注意 float 属性。<br>而不同点就是：</p>
 <ul>
-<li>mousedown时记录下鼠标的位置x1，y1</li>
-<li>mouseup时记录下鼠标的位置x2，y2</li>
-<li><p>判断两次位置是否一样或是相差小于一个定值（设为5px）:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = <span class="built_in">Math</span>.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2))</span><br></pre></td></tr></table></figure>
-<p>当d=0或是小于5时，即可认定用户没有拖拽。此时clickFlag为true，可以触发点击事件。</p>
-</li>
+<li>element.style 读取的只是元素的内联样式，即写在元素的 style 属性上的样式；而 getComputedStyle 读取的样式是最终样式，包括了内联样式、嵌入样式和外部样式。</li>
+<li>element.style 既支持读也支持写，我们通过 element.style 即可改写元素的样式。而 getComputedStyle 仅支持读并不支持写入。我们可以通过使用 getComputedStyle 读取样式，通过 element.style 修改样式<br>我们可以通过使用 getComputedStyle 读取样式，通过 element.style 修改样式。</li>
 </ul>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>关于 getComputedStyle 的兼容性问题，在 Chrome 和 Firefox 是支持该属性的，同时 IE 9 10 11 也是支持相同的特性的，IE 8并不支持这个特性。 IE 8 支持的是 element.currentStyle 这个属性，这个属性返回的值和 getComputedStyle 的返回基本一致，只是在 float 的支持上，IE 8 支持的是 styleFloat,这点需要注意。</p>
+<p>下面这个函数，能够获取一个元素的任意 CSS 属性值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">element, attr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(element.currentStyle) &#123;</span><br><span class="line">    <span class="keyword">return</span> element.currentStyle[attr];</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> getComputedStyle(element, <span class="literal">false</span>)[attr];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
         </div>
         <div class="post-tool">
@@ -186,8 +182,8 @@
         <div class="post-nav">
             
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/07/11/package-json中dependencies和devDependencies的区别/" rel="next" title="package.json中dependencies和devDependencies的区别">
-                    <i class="fa fa-chevron-left"></i> package.json中dependencies和devDependencies的区别
+                <a href="/2019/07/17/React创建组件的三种方式/" rel="next" title="React创建组件的三种方式">
+                    <i class="fa fa-chevron-left"></i> React创建组件的三种方式
                 </a>
             </div>
             
@@ -195,8 +191,8 @@
             
             
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/06/28/JS数组reduce方法/" rel="prev" title="JS数组reduce()方法">
-                    JS数组reduce()方法 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/07/12/FullScreen-Api/" rel="prev" title="FullScreen-Api">
+                    FullScreen-Api <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
             
@@ -213,7 +209,7 @@
         <strong class="sidebar-title">
             目录
         </strong>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bug的原因"><span class="toc-text">bug的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决思路"><span class="toc-text">解决思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法"><span class="toc-text">解决办法</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#getComputedStyle-用法"><span class="toc-text">getComputedStyle() 用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#defaultView"><span class="toc-text">defaultView</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#返回值"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#和-style-的异同"><span class="toc-text">和 style 的异同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容性"><span class="toc-text">兼容性</span></a></li></ol>
     </div>
 </aside>
     

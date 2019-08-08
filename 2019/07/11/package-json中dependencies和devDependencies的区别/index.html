@@ -29,7 +29,7 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>标签 - javascript - 记</title>
+<title>package.json中dependencies和devdependencies的区别 - 记</title>
 
 <meta name="keywords" content>
 
@@ -105,21 +105,21 @@
 
             <div class="page-title">
     <ul>
-        <li class>
-            <a href="/" data-name="最近">最近</a>
-        </li>
+        <li><a href="/">最近</a></li>
         
-        <li class>
-            <a href="/categories/tech-notes" data-name="技术">技术</a>
-        </li>
-        
-        <li class>
-            <a href="/categories/humanities" data-name="人文">人文</a>
-        </li>
-        
-        <li class>
-            <a href="/categories/others" data-name="其他">其他</a>
-        </li>
+            
+                <li class>
+                    <a href="/categories/tech-notes" data-name="技术">技术</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/humanities" data-name="人文">人文</a>
+                </li>
+            
+                <li class>
+                    <a href="/categories/others" data-name="其他">其他</a>
+                </li>
+            
         
         <li class="page-search">
     <form id="search" class="search-form">
@@ -131,187 +131,99 @@
     </ul>
 </div>
 <div class="main-inner">
-    
-        
-            
-<article class="post">
-    
-    <div class="post-header">
-        <div class="post-meta">
-            <a href="https://warefz.github.io" target="_blank">
-                <strong>ware_fz</strong>
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-header">
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://warefz.github.io" target="_blank">
+                    <img width="48" src="/images/favicon.png" alt="avatar">
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="https://warefz.github.io" target="_blank">ware_fz</a>
+                    <span title="最后编辑于&nbsp;2019-07-11">2019-07-11</span>
+                </p>
+                <p>自由</p>
+            </div>
+            <h2 class="post-title">package.json中dependencies和devDependencies的区别</h2>
+            <div class="post-meta">
+                本文共计643个字 |
+                您是第&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+            </div>
+        </div>
+        <div class="post-content markdown-body">
+            <p>在我们使用npm下载各种三方库的时候，都会在package.json中生成devDependencies或者dependencies，那么对于这两者，到底有什么区别呢？</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>对于我们依赖的这些插件库，有的是我们开发所使用的，有的则是项目所依赖的。对于这个分界线，我们诞生了dependencies和devDependencies，具体却别如下：</p>
+<ul>
+<li>devDependencies：开发环境使用</li>
+<li>dependencies：生产环境使用</li>
+</ul>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>例如：webpack，gulp等打包工具，这些都是我们开发阶段使用的，代码提交线上时，不需要这些工具，所以我们将它放入devDependencies即可，但是像jquery这类插件库，是我们生产环境所使用的，所以如要放入dependencies，如果未将jquery安装到dependencies，那么项目就可能报错，无法运行，所以类似这种项目必须依赖的插件库，我们则必须打入dependencies中。</p>
+<h2 id="npm简写指令"><a href="#npm简写指令" class="headerlink" title="npm简写指令"></a>npm简写指令</h2><ul>
+<li>-P 相当于 –save-prod,添加dependencies里面的包。在 -D -O不存在时,-P就是默认值</li>
+<li>-S 相当于 –save, 添加dependencies里面的包</li>
+<li>-D 相当于 –save-dev,添加devDependencies里面的包</li>
+<li>-O 相当于 –save-optional,添加在optionalDependencies里面的包</li>
+<li>–no-save 阻止保存记录在dependencies中</li>
+</ul>
+
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
             </a>
-            <em>·</em>2019-07-12
-            
         </div>
-        <a class="post-title" href="/2019/07/12/window-getComputedStyle方法的使用/" target="_blank" title="window.getComputedStyle方法的使用">window.getComputedStyle方法的使用</a>
-        <div class="post-meta">
-            <a href="/tags" target="_blank"><i class="fa fa-tags"></i></a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/js/" target="_blank">JavaScript</a>
-            
-        </div>
-    </div>
-    <div class="post-desc">
-        Window.getComputedStyle()方法返回一个对象，该对象在应用活动样式表并解析这些值可能包含的任何基本计算后报告元素的所有CSS属性的值。 私有的CSS属性值可以通过对象提供的API或通过简单地使用CSS属性名称进行索引来访问。
-    </div>
-</article>
-
-
-
         
+        <div class="post-tags">标签：
             
-<article class="post">
-    
-    <div class="post-header">
-        <div class="post-meta">
-            <a href="https://warefz.github.io" target="_blank">
-                <strong>ware_fz</strong>
-            </a>
-            <em>·</em>2019-07-12
+            <a href="/tags/js/">JavaScript</a>
             
         </div>
-        <a class="post-title" href="/2019/07/12/理解JavaScript中的macrotask和microtask/" target="_blank" title="理解JavaScript中的macrotask和microtask">理解JavaScript中的macrotask和microtask</a>
-        <div class="post-meta">
-            <a href="/tags" target="_blank"><i class="fa fa-tags"></i></a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/js/" target="_blank">JavaScript</a>
-            
-        </div>
-    </div>
-    <div class="post-desc">
-        理解JavaScript中的macrotask和microtask
-    </div>
-</article>
-
-
-
         
+        <div class="post-nav">
             
-<article class="post">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/07/12/理解JavaScript中的macrotask和microtask/" rel="next" title="理解JavaScript中的macrotask和microtask">
+                    <i class="fa fa-chevron-left"></i> 理解JavaScript中的macrotask和microtask
+                </a>
+            </div>
+            
+            <span class="post-nav-divider"></span>
+            
+            
+            <div class="post-nav-prev post-nav-item">
+                <a href="/2019/07/05/解决JavaScript拖动时触发点击事件的BUG/" rel="prev" title="解决JavaScript拖动时触发点击事件的BUG">
+                    解决JavaScript拖动时触发点击事件的BUG <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+            
+        </div>
+    </article>
     
-    <div class="post-header">
-        <div class="post-meta">
-            <a href="https://warefz.github.io" target="_blank">
-                <strong>ware_fz</strong>
-            </a>
-            <em>·</em>2019-07-11
-            
-        </div>
-        <a class="post-title" href="/2019/07/11/package-json中dependencies和devDependencies的区别/" target="_blank" title="package.json中dependencies和devDependencies的区别">package.json中dependencies和devDependencies的区别</a>
-        <div class="post-meta">
-            <a href="/tags" target="_blank"><i class="fa fa-tags"></i></a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/js/" target="_blank">JavaScript</a>
-            
-        </div>
-    </div>
-    <div class="post-desc">
-        package.json中dependencies和devDependencies的区别
-    </div>
-</article>
-
-
-
-        
-            
-<article class="post">
+    <p style="text-align: center">本文代表个人观点，内容仅供参考。若有不恰当之处，望不吝赐教！</p>
     
-    <div class="post-header">
-        <div class="post-meta">
-            <a href="https://warefz.github.io" target="_blank">
-                <strong>ware_fz</strong>
-            </a>
-            <em>·</em>2019-07-05
-            
-        </div>
-        <a class="post-title" href="/2019/07/05/解决JavaScript拖动时触发点击事件的BUG/" target="_blank" title="解决JavaScript拖动时触发点击事件的BUG">解决JavaScript拖动时触发点击事件的BUG</a>
-        <div class="post-meta">
-            <a href="/tags" target="_blank"><i class="fa fa-tags"></i></a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/js/" target="_blank">JavaScript</a>
-            
-        </div>
-    </div>
-    <div class="post-desc">
-        解决JavaScript拖动时触发点击事件的BUG
-    </div>
-</article>
-
-
-
-        
-            
-<article class="post">
     
-    <div class="post-header">
-        <div class="post-meta">
-            <a href="https://warefz.github.io" target="_blank">
-                <strong>ware_fz</strong>
-            </a>
-            <em>·</em>2019-06-28
-            
-        </div>
-        <a class="post-title" href="/2019/06/28/JS数组reduce方法/" target="_blank" title="JS数组reduce()方法">JS数组reduce()方法</a>
-        <div class="post-meta">
-            <a href="/tags" target="_blank"><i class="fa fa-tags"></i></a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/js/" target="_blank">JavaScript</a>
-            
-        </div>
-    </div>
-    <div class="post-desc">
-        reduce()方法可以搞定的东西
-    </div>
-</article>
 
-
-
-        
-            
-<article class="post">
     
-    <div class="post-header">
-        <div class="post-meta">
-            <a href="https://warefz.github.io" target="_blank">
-                <strong>ware_fz</strong>
-            </a>
-            <em>·</em>2019-06-27
-            
-        </div>
-        <a class="post-title" href="/2019/06/27/jquery的on方法和off方法/" target="_blank" title="jquery的on()方法和off()方法">jquery的on()方法和off()方法</a>
-        <div class="post-meta">
-            <a href="/tags" target="_blank"><i class="fa fa-tags"></i></a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/js/" target="_blank">JavaScript</a>
-            
-                <em>·</em>
-                <a href="https://warefz.github.io/tags/jquery/" target="_blank">jQuery</a>
-            
-        </div>
+    <aside id="article-toc" tole="navigation" class="fixed">
+    <div id="article-toc-inner">
+        <strong class="sidebar-title">
+            目录
+        </strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#区别"><span class="toc-text">区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#举例说明"><span class="toc-text">举例说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#npm简写指令"><span class="toc-text">npm简写指令</span></a></li></ol>
     </div>
-    <div class="post-desc">
-        jquery的on()方法和off()方法
-    </div>
-</article>
-
-
-
-        
+</aside>
     
+    
+    
+
+
 </div>
+<script src="/js/busuanzi.pure.mini.js"></script>
 
 
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: left">
+    <div class="footer-inner" style="text-align: center">
         <p>
             <a href="/about" title="关于">关于</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->
